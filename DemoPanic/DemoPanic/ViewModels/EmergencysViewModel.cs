@@ -3,6 +3,7 @@
     using GalaSoft.MvvmLight.Command;
     using System.Windows.Input;
     using Xamarin.Forms;
+    using System;
     public class EmergencysViewModel
     {
         #region Attributes
@@ -29,10 +30,14 @@
 
         private async void AmbulanceAlert()
         {
-            await Application.Current.MainPage.DisplayAlert(
+            if (await Application.Current.MainPage.DisplayAlert(
                     "Alerta",
-                    "Usted a generado una alerta de ambulancia",
-                    "Accept");
+                    "Desea llamar a la ambulancia",
+                    "Si",
+                    "No"))
+            {
+                OnCall("*111");
+            }
             return;
         }
 
@@ -46,10 +51,14 @@
 
         private async void FamilyAlert()
         {
-            await Application.Current.MainPage.DisplayAlert(
+            if (await Application.Current.MainPage.DisplayAlert(
                     "Alerta",
-                    "Usted a generado una alerta para su familia",
-                    "Accept");
+                    "Desea llamar a la Familia",
+                    "Si",
+                    "No"))
+            {
+                OnCall("*321");
+            }
             return;
         }
 
@@ -63,10 +72,14 @@
 
         private async void PoliceAlert()
         {
-            await Application.Current.MainPage.DisplayAlert(
+            if (await Application.Current.MainPage.DisplayAlert(
                     "Alerta",
-                    "Usted a generado una alerta para la policia",
-                    "Accept");
+                    "Desea llamar a la policia",
+                    "Si",
+                    "No"))
+            {
+                OnCall("*123");
+            }
             return;
         }
 
@@ -80,11 +93,24 @@
 
         private async void PrincipalContactAlert()
         {
-            await Application.Current.MainPage.DisplayAlert(
+            if (await Application.Current.MainPage.DisplayAlert(
                     "Alerta",
-                    "Usted a generado una alerta para el contacto de emergencia",
-                    "Accept");
+                    "Desea llamar al contacto de emergencia",
+                    "Si",
+                    "No"))
+            {
+                OnCall("*611");
+            }
             return;
+        }
+        #endregion
+
+        #region Methods
+        async void OnCall(string number)
+        {
+            var dialer = DependencyService.Get<IDialer>();
+            if (dialer != null)
+                await dialer.DialAsync(number);
         }
         #endregion
     }

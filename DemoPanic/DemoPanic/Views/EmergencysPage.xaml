@@ -24,8 +24,7 @@
                 <Label
                     Text="Ambulancia"
                     HorizontalOptions="Center"
-                    FontSize="Large"
-                    FontAttributes="Bold"/>
+                    FontSize="Medium"/>
             </StackLayout>
             <StackLayout
                 Grid.Row="0" 
@@ -42,8 +41,7 @@
                 <Label
                     Text="Familia"
                     HorizontalOptions="Center"
-                    FontSize="Large"
-                    FontAttributes="Bold"/>
+                    FontSize="Medium"/>
             </StackLayout>
             <StackLayout
                 Grid.Row="1" 
@@ -60,8 +58,7 @@
                 <Label
                     Text="Policia"
                     HorizontalOptions="Center"
-                    FontSize="Large"
-                    FontAttributes="Bold"/>
+                    FontSize="Medium"/>
             </StackLayout>
             <StackLayout
                 Grid.Row="1" 
@@ -78,8 +75,7 @@
                 <Label
                     Text="Contacto Principal"
                     HorizontalOptions="Center"
-                    FontSize="Large"
-                    FontAttributes="Bold"
+                    FontSize="Medium"
                     WidthRequest="60"/>
             </StackLayout>
         </Grid>
