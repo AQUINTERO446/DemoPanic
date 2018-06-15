@@ -1,18 +1,20 @@
-using System;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
-[assembly: XamlCompilation (XamlCompilationOptions.Compile)]
+
+//[assembly: XamlCompilation (XamlCompilationOptions.Compile)]
 namespace DemoPanic
 {
-	public partial class App : Application
+    using System;
+    using Xamarin.Forms;
+    using Xamarin.Forms.Xaml;
+    using Views;
+    public partial class App : Application
 	{
 		public App ()
 		{
 			InitializeComponent();
 
-			MainPage = new MainPage();
-		}
+            this.MainPage = new NavigationPage(new StartPage());
+        }
 
 		protected override void OnStart ()
 		{

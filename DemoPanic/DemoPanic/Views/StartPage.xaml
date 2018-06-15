@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:DemoPanic"
+             x:Class="DemoPanic.Views.StartPage"
+             BindingContext="{Binding Main, Source={StaticResource Locator}}"
+             Title="Bienvenido">
+    <ContentPage.Content>
+        <Grid
+            BindingContext="{Binding Start}"
+            Padding="5"
+            Margin="40">
+            <Image
+                Aspect="AspectFit"
+                Grid.Row="0" 
+                Grid.Column="0"
+                Source="ic_alert">
+            </Image>
+            <Image
+                Aspect="AspectFit"
+                Grid.Row="1" 
+                Grid.Column="0"
+                Source="ic_voice">
+            </Image>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
