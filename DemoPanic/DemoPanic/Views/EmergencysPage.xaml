@@ -75,8 +75,7 @@
                 <Label
                     Text="Contacto Principal"
                     HorizontalOptions="Center"
-                    FontSize="Medium"
-                    WidthRequest="60"/>
+                    FontSize="Medium"/>
             </StackLayout>
         </Grid>
     </ContentPage.Content>
