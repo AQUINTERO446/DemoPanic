@@ -1,26 +1,60 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace DemoPanic.ViewModels
+﻿namespace DemoPanic.ViewModels
 {
-    public class StartViewModel : BaseViewModel
+    using GalaSoft.MvvmLight.Command;
+    using System.Windows.Input;
+    using Xamarin.Forms;
+
+    public class StartViewModel
     {
         #region Attributes
         #endregion
 
         #region Properties
-        public string WelcomeMessage { get; set; }
         #endregion
 
         #region Constructors
         public StartViewModel()
         {
-            this.WelcomeMessage = "Que accion desea realizar";
+            
         }
         #endregion
 
         #region Commands
+        public ICommand GeneralAlertCommand
+        {
+            get
+            {
+                return new RelayCommand(GeneralAlert);
+            }
+        }
+
+        private async void GeneralAlert()
+        {
+            await Application.Current.MainPage.DisplayAlert(
+                    "Alerta",
+                    "Usted a generado una alerta general",
+                    "Accept");
+            return;
+        }
+
+        public ICommand VoiceAlertCommand
+        {
+            get
+            {
+                return new RelayCommand(VoiceAlert);
+            }
+        }
+
+        private async void VoiceAlert()
+        {
+            await Application.Current.MainPage.DisplayAlert(
+                    "Alerta",
+                    "Usted a generado una alerta por voz",
+                    "Accept");
+            return;
+        }
+
+
         #endregion
     }
 }
