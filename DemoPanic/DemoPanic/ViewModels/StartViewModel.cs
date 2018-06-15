@@ -3,10 +3,12 @@
     using GalaSoft.MvvmLight.Command;
     using System.Windows.Input;
     using Xamarin.Forms;
+    using Views;
 
     public class StartViewModel
     {
         #region Attributes
+
         #endregion
 
         #region Properties
@@ -30,11 +32,8 @@
 
         private async void GeneralAlert()
         {
-            await Application.Current.MainPage.DisplayAlert(
-                    "Alerta",
-                    "Usted a generado una alerta general",
-                    "Accept");
-            return;
+            MainViewModel.GetInstance().Emergencys = new EmergencysViewModel();
+            await Application.Current.MainPage.Navigation.PushAsync(new EmergencysPage());
         }
 
         public ICommand VoiceAlertCommand

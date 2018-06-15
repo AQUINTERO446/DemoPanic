@@ -12,6 +12,11 @@ namespace DemoPanic.ViewModels
             get;
             set;
         }
+        public EmergencysViewModel Emergencys
+        {
+            get;
+            set;
+        }
         #endregion
 
         #region Constructors
