@@ -12,6 +12,7 @@ namespace DemoPanic.iOS
     {
         public Task<bool> DialAsync(string number)
         {
+            //Verificar si permite la salida de *#
             return Task.FromResult(
                 UIApplication.SharedApplication.OpenUrl(
                 new NSUrl("tel:" + number))
