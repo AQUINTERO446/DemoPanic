@@ -3,6 +3,7 @@ using Foundation;
 using UIKit;
 using Xamarin.Forms;
 using DemoPanic.iOS;
+using DemoPanic.Interface;
 
 [assembly: Dependency(typeof(PhoneDialer))]
 
