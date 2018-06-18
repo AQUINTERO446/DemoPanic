@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DemoPanic.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,6 +7,10 @@ namespace DemoPanic.ViewModels
 {
     public class MainViewModel
     {
+        #region Properties
+        public TokenResponse Token { get; set; }
+        #endregion
+
         #region ViewModels
         public StartViewModel Start
         {

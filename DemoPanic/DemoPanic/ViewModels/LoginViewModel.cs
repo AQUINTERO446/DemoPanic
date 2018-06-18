@@ -72,7 +72,6 @@
 
         private async void Login()
         {
-            /*
             if (string.IsNullOrEmpty(this.Email))
             {
                 await Application.Current.MainPage.DisplayAlert(
@@ -134,9 +133,15 @@
                 this.Password = string.Empty;
                 return;
             }
-
+            
             var mainViewModel = MainViewModel.GetInstance();
-            //mainViewModel.Token = token;
+            mainViewModel.Token = token;
+
+            await Application.Current.MainPage.DisplayAlert(
+                    "Error",
+                    "Logueado correctamente",
+                    "Aceptar");
+            this.Password = string.Empty;
             //mainViewModel.Lands = new LandsViewModel();
             //await Application.Current.MainPage.Navigation.PushAsync(new LandsPage());
 
@@ -145,7 +150,7 @@
 
             this.Email = string.Empty;
             this.Password = string.Empty;
-            */
+            
         }
         #endregion
     }
