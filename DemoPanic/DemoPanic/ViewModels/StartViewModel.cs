@@ -4,6 +4,7 @@
     using System.Windows.Input;
     using Xamarin.Forms;
     using Views;
+    using System;
 
     public class StartViewModel
     {
@@ -53,6 +54,19 @@
             return;
         }
 
+        public ICommand LoginCommand
+        {
+            get
+            {
+                return new RelayCommand(Login);
+            }
+        }
+
+        private async void Login()
+        {
+            MainViewModel.GetInstance().Login = new LoginViewModel();
+            await Application.Current.MainPage.Navigation.PushAsync(new LoginPage());
+        }
 
         #endregion
     }

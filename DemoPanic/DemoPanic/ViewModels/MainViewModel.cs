@@ -17,6 +17,11 @@ namespace DemoPanic.ViewModels
             get;
             set;
         }
+        public LoginViewModel Login
+        {
+            get;
+            set;
+        }
         #endregion
 
         #region Constructors

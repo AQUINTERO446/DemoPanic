@@ -4,6 +4,8 @@
     using System.Windows.Input;
     using Xamarin.Forms;
     using System;
+    using DemoPanic.Interface;
+
     public class EmergencysViewModel
     {
         #region Attributes
