@@ -3,8 +3,7 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:pages="clr-namespace:DemoPanic.Views"
-    x:Class="DemoPanic.Views.MasterPage"
-    NavigationPage.HasNavigationBar="False">
+    x:Class="DemoPanic.Views.MasterPage">
     <MasterDetailPage.Master>
         <pages:MenuPage/>
     </MasterDetailPage.Master>

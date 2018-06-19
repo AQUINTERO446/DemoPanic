@@ -207,4 +207,7 @@
   <ItemGroup>
     <BundleResource Include="Resources\ic_worker.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_action_menu.png" />
+  </ItemGroup>
 </Project>

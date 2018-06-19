@@ -4,7 +4,8 @@
              x:Class="DemoPanic.Views.MenuPage"
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
              Title="Menu"
-             BackgroundColor="Navy">
+             BackgroundColor="Navy"
+             Icon="ic_action_menu">
     <ContentPage.Content>
         <StackLayout
             Padding="5">

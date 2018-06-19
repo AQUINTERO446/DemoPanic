@@ -138,7 +138,7 @@
             mainViewModel.Token = token;
 
             await Application.Current.MainPage.DisplayAlert(
-                    "Error",
+                    "Login",
                     "Logueado correctamente",
                     "Aceptar");
             this.Password = string.Empty;

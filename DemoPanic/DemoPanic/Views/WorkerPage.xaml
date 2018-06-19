@@ -3,8 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DemoPanic.Views.WorkerPage"
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
-             Title="Trabajador"
-             NavigationPage.HasNavigationBar="False">
+             Title="Trabajador">
     <ContentPage.Content>
         <StackLayout
             BindingContext="{Binding Worker}"

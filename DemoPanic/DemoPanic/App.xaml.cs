@@ -25,7 +25,7 @@ namespace DemoPanic
             InitializeComponent();
             //var mainViewModel = MainViewModel.GetInstance();
             //mainViewModel.Start = new StartViewModel();
-            Application.Current.MainPage = new NavigationPage(new MasterPage());
+            Application.Current.MainPage = new MasterPage();
             //this.MainPage = new NavigationPage(new MasterPage());
         }
         #endregion

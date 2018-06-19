@@ -29,17 +29,17 @@ namespace DemoPanic.ViewModels
             if (this.PageName == "WorkerPage")
             {
                 MainViewModel.GetInstance().Login = new LoginViewModel();
-                await Application.Current.MainPage.Navigation.PushAsync(new NavigationPage(new LoginPage()));
+                await App.Navigator.PushAsync(new LoginPage());
             }
             else if (this.PageName == "SettingsPage")
             {
                 MainViewModel.GetInstance().Settings = new SettingsViewModel();
-                await Application.Current.MainPage.Navigation.PushAsync(new NavigationPage(new SettingsPage()));
+                await App.Navigator.PushAsync(new SettingsPage());
             }
             else if (this.PageName == "StartPage")
             {
-                //MainViewModel.GetInstance().Start = new StartViewModel();
-                //await Application.Current.MainPage.Navigation.PushAsync(new NavigationPage(new StartPage()));
+                MainViewModel.GetInstance().Start = new StartViewModel();
+                await App.Navigator.PushAsync(new StartPage());
             }
         }
         #endregion
