@@ -144,7 +144,7 @@
             this.Password = string.Empty;
 
             MainViewModel.GetInstance().Worker = new WorkerViewModel();
-            await Application.Current.MainPage.Navigation.PushAsync(new NavigationPage(new WorkerPage()));
+            await App.Navigator.PushAsync(new WorkerPage());
 
             this.IsRunning = false;
             this.IsEnabled = true;
