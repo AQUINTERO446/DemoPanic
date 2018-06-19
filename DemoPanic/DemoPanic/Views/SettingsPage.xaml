@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DemoPanic.Views.SettingsPage"
+             BindingContext="{Binding Main, Source={StaticResource Locator}}"
+             Title="Configuracion">
+    <ContentPage.Content>
+        <StackLayout
+            BindingContext="{Binding Settings}">
+            <Label Text="Pestaña de configuraciones para el usuario, por implementar"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

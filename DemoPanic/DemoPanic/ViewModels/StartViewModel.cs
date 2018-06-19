@@ -34,7 +34,7 @@
         private async void GeneralAlert()
         {
             MainViewModel.GetInstance().Emergencys = new EmergencysViewModel();
-            await Application.Current.MainPage.Navigation.PushAsync(new EmergencysPage());
+            await Application.Current.MainPage.Navigation.PushAsync(new NavigationPage (new EmergencysPage()));
         }
 
         public ICommand VoiceAlertCommand
@@ -67,7 +67,6 @@
             MainViewModel.GetInstance().Login = new LoginViewModel();
             await Application.Current.MainPage.Navigation.PushAsync(new LoginPage());
         }
-
         #endregion
     }
 }

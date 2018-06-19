@@ -1,6 +1,7 @@
 ﻿using DemoPanic.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 
 namespace DemoPanic.ViewModels
@@ -9,6 +10,11 @@ namespace DemoPanic.ViewModels
     {
         #region Properties
         public TokenResponse Token { get; set; }
+        public ObservableCollection<MenuItemViewModel> Menus
+        {
+            get;
+            set;
+        }
         #endregion
 
         #region ViewModels
@@ -27,6 +33,16 @@ namespace DemoPanic.ViewModels
             get;
             set;
         }
+        public WorkerViewModel Worker
+        {
+            get;
+            set;
+        }
+        public SettingsViewModel Settings
+        {
+            get;
+            set;
+        }
         #endregion
 
         #region Constructors
@@ -34,6 +50,7 @@ namespace DemoPanic.ViewModels
         {
             instance = this;
             this.Start = new StartViewModel();
+            this.LoadMenu();
         }
         #endregion
 
@@ -48,6 +65,31 @@ namespace DemoPanic.ViewModels
             }
 
             return instance;
+        }
+        #endregion
+
+        #region Methods
+        private void LoadMenu()
+        {
+            this.Menus = new ObservableCollection<MenuItemViewModel>();
+            this.Menus.Add(new MenuItemViewModel
+            {
+                Icon = "ic_worker",
+                PageName = "WorkerPage",
+                Title = "Trabajadores"
+            });
+            this.Menus.Add(new MenuItemViewModel
+            {
+                Icon = "ic_settings",
+                PageName = "SettingsPage",
+                Title = "Configuracion"
+            });
+            this.Menus.Add(new MenuItemViewModel
+            {
+                Icon = "ic_exit",
+                PageName = "StartPage",
+                Title = "Inicio"
+            });
         }
         #endregion
     }

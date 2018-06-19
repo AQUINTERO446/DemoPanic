@@ -7,28 +7,44 @@ namespace DemoPanic
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
     using Views;
+    using DemoPanic.ViewModels;
+
     public partial class App : Application
 	{
-		public App ()
-		{
-			InitializeComponent();
+        #region Properties
+        public static NavigationPage Navigator
+        {
+            get;
+            internal set;
+        }
+        #endregion
 
-            this.MainPage = new NavigationPage(new StartPage());
+        #region Constructors
+        public App()
+        {
+            InitializeComponent();
+            //var mainViewModel = MainViewModel.GetInstance();
+            //mainViewModel.Start = new StartViewModel();
+            Application.Current.MainPage = new NavigationPage(new MasterPage());
+            //this.MainPage = new NavigationPage(new MasterPage());
+        }
+        #endregion
+
+        #region Methods
+        protected override void OnStart()
+        {
+            // Handle when your app starts
         }
 
-		protected override void OnStart ()
-		{
-			// Handle when your app starts
-		}
+        protected override void OnSleep()
+        {
+            // Handle when your app sleeps
+        }
 
-		protected override void OnSleep ()
-		{
-			// Handle when your app sleeps
-		}
-
-		protected override void OnResume ()
-		{
-			// Handle when your app resumes
-		}
-	}
+        protected override void OnResume()
+        {
+            // Handle when your app resumes
+        } 
+        #endregion
+    }
 }

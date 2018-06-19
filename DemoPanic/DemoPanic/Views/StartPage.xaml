@@ -14,17 +14,6 @@
                 Grid.Column="0"
                 Margin="5"
                 VerticalOptions="Center">
-                <Label
-                Text="Login"
-                HorizontalOptions="End"
-                VerticalOptions="Start"
-                FontSize="Large"
-                FontAttributes="Bold">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer
-                        Command="{Binding LoginCommand}"/>
-                    </Label.GestureRecognizers>
-                </Label>
                 <Image
                     Aspect="AspectFit"
                     HeightRequest="200"

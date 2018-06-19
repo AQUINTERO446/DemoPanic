@@ -10,12 +10,11 @@ using Xamarin.Forms.Xaml;
 namespace DemoPanic.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class EmergencysPage : ContentPage
+	public partial class MenuPage : ContentPage
 	{
-		public EmergencysPage ()
+		public MenuPage ()
 		{
-            NavigationPage.SetHasNavigationBar(this, false);
-            InitializeComponent ();
+			InitializeComponent ();
 		}
 	}
 }
