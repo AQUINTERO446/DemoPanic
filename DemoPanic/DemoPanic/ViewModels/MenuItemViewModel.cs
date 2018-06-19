@@ -39,7 +39,7 @@ namespace DemoPanic.ViewModels
             else if (this.PageName == "StartPage")
             {
                 MainViewModel.GetInstance().Start = new StartViewModel();
-                await App.Navigator.PushAsync(new StartPage());
+                Application.Current.MainPage = new MasterPage();
             }
         }
         #endregion
