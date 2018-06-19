@@ -142,8 +142,9 @@
                     "Logueado correctamente",
                     "Aceptar");
             this.Password = string.Empty;
-            //mainViewModel.Lands = new LandsViewModel();
-            Application.Current.MainPage = new MasterPage();
+
+            MainViewModel.GetInstance().Worker = new WorkerViewModel();
+            await Application.Current.MainPage.Navigation.PushAsync(new NavigationPage(new WorkerPage()));
 
             this.IsRunning = false;
             this.IsEnabled = true;

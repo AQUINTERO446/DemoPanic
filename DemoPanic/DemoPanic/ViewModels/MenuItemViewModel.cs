@@ -28,8 +28,8 @@ namespace DemoPanic.ViewModels
         {
             if (this.PageName == "WorkerPage")
             {
-                MainViewModel.GetInstance().Worker = new WorkerViewModel();
-                await Application.Current.MainPage.Navigation.PushAsync(new NavigationPage(new WorkerPage()));
+                MainViewModel.GetInstance().Login = new LoginViewModel();
+                await Application.Current.MainPage.Navigation.PushAsync(new NavigationPage(new LoginPage()));
             }
             else if (this.PageName == "SettingsPage")
             {
