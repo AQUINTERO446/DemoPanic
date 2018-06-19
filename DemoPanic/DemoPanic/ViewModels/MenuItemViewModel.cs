@@ -33,8 +33,10 @@ namespace DemoPanic.ViewModels
             }
             else if (this.PageName == "SettingsPage")
             {
-                MainViewModel.GetInstance().Settings = new SettingsViewModel();
-                await App.Navigator.PushAsync(new SettingsPage());
+                MainViewModel.GetInstance().Ubications = new UbicationsViewModel();
+                await App.Navigator.PushAsync(new UbicationsPage());
+                //MainViewModel.GetInstance().Settings = new SettingsViewModel();
+                //await App.Navigator.PushAsync(new SettingsPage());
             }
             else if (this.PageName == "StartPage")
             {

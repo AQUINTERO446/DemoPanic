@@ -143,8 +143,8 @@
                     "Aceptar");
             this.Password = string.Empty;
 
-            MainViewModel.GetInstance().Worker = new WorkerViewModel();
-            await App.Navigator.PushAsync(new WorkerPage());
+            MainViewModel.GetInstance().Ubications = new UbicationsViewModel();
+            await App.Navigator.PushAsync(new UbicationsPage());
 
             this.IsRunning = false;
             this.IsEnabled = true;
