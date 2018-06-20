@@ -1,20 +1,63 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
+﻿
 
 namespace DemoPanic.Views
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
+    using Xamarin.Forms;
+    using Xamarin.Forms.Maps;
+    using Xamarin.Forms.Xaml;
+    using ViewModels;
+    using System;
+
+    [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class UbicationsPage : ContentPage
 	{
-		public UbicationsPage ()
-		{
-			InitializeComponent ();
-		}
-	}
+        #region Services
+        GeolocatorService geolocatorService;
+        #endregion
+
+        #region Constructors
+        public UbicationsPage()
+        {
+            InitializeComponent();
+
+            geolocatorService = new GeolocatorService();
+
+            MoveMapToCurrentPosition();
+        }
+        #endregion
+
+        #region Methods
+        async void MoveMapToCurrentPosition()
+        {
+            await geolocatorService.GetLocation();
+            if (geolocatorService.Latitude != 0 ||
+                geolocatorService.Longitude != 0)
+            {
+                var position = new Position(
+                    geolocatorService.Latitude,
+                    geolocatorService.Longitude);
+                MyMap.MoveToRegion(MapSpan.FromCenterAndRadius(
+                    position,
+                    Distance.FromKilometers(6.5)));
+            }
+
+            LoadPins();
+
+        }
+        /// <summary>
+        /// Load Pins in to maps
+        /// </summary>
+        private void LoadPins()
+        {
+            var ubicationsViewModel = UbicationsViewModel.GetInstance();
+            ubicationsViewModel.LoadPins();
+
+            foreach (var pin in ubicationsViewModel.Pins)
+            {
+                MyMap.Pins.Add(pin);
+            }
+        }
+        #endregion
+
+    }
 }

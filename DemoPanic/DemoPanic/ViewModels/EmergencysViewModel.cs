@@ -5,6 +5,7 @@
     using Xamarin.Forms;
     using System;
     using DemoPanic.Interface;
+    using DemoPanic.Views;
 
     public class EmergencysViewModel
     {
@@ -32,14 +33,8 @@
 
         private async void AmbulanceAlert()
         {
-            if (await Application.Current.MainPage.DisplayAlert(
-                    "Alerta",
-                    "Desea llamar a la ambulancia",
-                    "Si",
-                    "No"))
-            {
-                OnCall("*111");
-            }
+            MainViewModel.GetInstance().Ubications = new UbicationsViewModel();
+            await App.Navigator.PushAsync(new UbicationsPage());
             return;
         }
 
@@ -74,14 +69,8 @@
 
         private async void PoliceAlert()
         {
-            if (await Application.Current.MainPage.DisplayAlert(
-                    "Alerta",
-                    "Desea llamar a la policia",
-                    "Si",
-                    "No"))
-            {
-                OnCall("*123");
-            }
+            MainViewModel.GetInstance().Ubications = new UbicationsViewModel();
+            await App.Navigator.PushAsync(new UbicationsPage());
             return;
         }
 
