@@ -1,9 +1,12 @@
 ﻿using DemoPanic.Models;
+using DemoPanic.Views;
+using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Xamarin.Forms.Maps;
 
 namespace DemoPanic.ViewModels
@@ -74,11 +77,22 @@ namespace DemoPanic.ViewModels
                     }
                 );
             }
-
             return list;
-
-
         }
+        /*
+        public ICommand RefreshLocationCommand
+        {
+            get
+            {
+                return new RelayCommand(RefreshLocation);
+            }
+        }
+
+        public void RefreshLocation()
+        {
+            
+        }
+        */
         #endregion
 
         #region Singleton

@@ -13,6 +13,15 @@
                 IsShowingUser="true"
                 MapType="Street">
             </maps:Map>
+            <Label
+                x:Name="UserLocationLabel"
+                FontAttributes="Bold"
+                FontSize="Large"
+                TextColor="Black"/>
+            <Button
+                x:Name="RefreshButton"
+                Text="Refrescar Ubicacion"
+                Clicked="RefreshLocation_Clicked"/>
         </StackLayout>
 
     </ContentPage.Content>

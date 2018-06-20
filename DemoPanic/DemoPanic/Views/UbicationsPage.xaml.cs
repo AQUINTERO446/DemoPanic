@@ -1,6 +1,4 @@
-﻿
-
-namespace DemoPanic.Views
+﻿namespace DemoPanic.Views
 {
     using Xamarin.Forms;
     using Xamarin.Forms.Maps;
@@ -18,10 +16,10 @@ namespace DemoPanic.Views
         #region Constructors
         public UbicationsPage()
         {
+            
             InitializeComponent();
-
+            
             geolocatorService = new GeolocatorService();
-
             MoveMapToCurrentPosition();
         }
         #endregion
@@ -40,9 +38,7 @@ namespace DemoPanic.Views
                     position,
                     Distance.FromKilometers(6.5)));
             }
-
             LoadPins();
-
         }
         /// <summary>
         /// Load Pins in to maps
@@ -57,6 +53,26 @@ namespace DemoPanic.Views
                 MyMap.Pins.Add(pin);
             }
         }
+
+        private void RefreshLocation_Clicked(object sender, EventArgs e)
+        {
+            RefreshLocation();
+        }
+
+        public async void RefreshLocation()
+        {
+            await geolocatorService.GetLocation();
+            if (geolocatorService.Latitude != 0 ||
+                geolocatorService.Longitude != 0)
+            {
+                UserLocationLabel.Text = String.Format(
+                    "Lat. : {0:0.6} / Long. : {1:0.6}",
+                    geolocatorService.Latitude,
+                    geolocatorService.Longitude);
+
+            }
+        }
+
         #endregion
 
     }

@@ -36,5 +36,11 @@
 	<string>Assets.xcassets/AppIcon.appiconset</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Esta aplicacion necesita utilizar el acceso a mapas</string>
+  <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+  <string>Esta aplicacion necesita acceso a la localizacion cuando este abierta y en background.</string>
+  <key>UIBackgroundModes</key>
+  <array>
+    <string>location</string>
+  </array>
 </dict>
 </plist>
