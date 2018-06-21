@@ -1,13 +1,11 @@
-﻿using GalaSoft.MvvmLight.Command;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows.Input;
-using Xamarin.Forms;
-using DemoPanic.Views;
-
-namespace DemoPanic.ViewModels
+﻿namespace DemoPanic.ViewModels
 {
+    using GalaSoft.MvvmLight.Command;
+    using System.Windows.Input;
+    using Xamarin.Forms;
+    using Views;
+    using Helpers;
+
     public class MenuItemViewModel
     {
         #region Properties
@@ -24,22 +22,28 @@ namespace DemoPanic.ViewModels
             }
         }
 
-        private async void Navigate()
+        private void Navigate()
         {
             if (this.PageName == "WorkerPage")
             {
-                MainViewModel.GetInstance().Login = new LoginViewModel();
-                await App.Navigator.PushAsync(new LoginPage());
+                //Application.Current.MainPage = new NavigationPage(
+                  //  new WorkerPage());
             }
             else if (this.PageName == "SettingsPage")
             {
-                MainViewModel.GetInstance().Settings = new SettingsViewModel();
-                await App.Navigator.PushAsync(new SettingsPage());
+                //Application.Current.MainPage = new NavigationPage(
+                    //new SettingsPage());
             }
-            else if (this.PageName == "StartPage")
+            else if (this.PageName == "LoginPage")
             {
-                MainViewModel.GetInstance().Start = new StartViewModel();
-                Application.Current.MainPage = new MasterPage();
+                Settings.Token = string.Empty;
+                Settings.TokenType = string.Empty;
+                var mainViewModel = MainViewModel.GetInstance();
+                mainViewModel.Token = string.Empty;
+                mainViewModel.TokenType = string.Empty;
+                mainViewModel.Login = new LoginViewModel();
+                Application.Current.MainPage = new NavigationPage(
+                    new LoginPage());
             }
         }
         #endregion

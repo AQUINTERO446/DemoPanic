@@ -66,7 +66,7 @@
                 geolocatorService.Longitude != 0)
             {
                 UserLocationLabel.Text = String.Format(
-                    "Lat. : {0:0.6} / Long. : {1:0.6}",
+                    "Lat. : {0:0.000000} / Long. : {1:0.000000}",
                     geolocatorService.Latitude,
                     geolocatorService.Longitude);
 

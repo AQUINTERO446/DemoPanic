@@ -9,7 +9,13 @@ namespace DemoPanic.ViewModels
     public class MainViewModel
     {
         #region Properties
-        public TokenResponse Token
+        public string Token
+        {
+            get;
+            set;
+        }
+
+        public string TokenType
         {
             get;
             set;
@@ -96,8 +102,8 @@ namespace DemoPanic.ViewModels
             this.Menus.Add(new MenuItemViewModel
             {
                 Icon = "ic_exit",
-                PageName = "StartPage",
-                Title = "Inicio"
+                PageName = "LoginPage",
+                Title = "Cerrar Sesión"
             });
         }
         #endregion

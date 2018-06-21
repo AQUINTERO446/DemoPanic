@@ -11,7 +11,7 @@
                 Padding="5">
                 <Image
                     Source="ic_message"
-                    HeightRequest="100">
+                    HeightRequest="200">
                 </Image>
                 <Grid
                     Margin="10,0"
@@ -101,7 +101,7 @@
                     VerticalOptions="EndAndExpand">
                     <Image
                         Source="ic_email"
-                        HeightRequest="100">
+                        HeightRequest="200">
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding LoginEmailComand}"/>
                         </Image.GestureRecognizers>

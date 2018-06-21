@@ -8,6 +8,7 @@ namespace DemoPanic
     using Xamarin.Forms.Xaml;
     using Views;
     using DemoPanic.ViewModels;
+    using DemoPanic.Helpers;
 
     public partial class App : Application
 	{
@@ -23,7 +24,19 @@ namespace DemoPanic
         public App()
         {
             InitializeComponent();
-            Application.Current.MainPage = new MasterPage();
+            if (string.IsNullOrEmpty(Settings.Token))
+            {
+                MainViewModel.GetInstance().Login = new LoginViewModel();
+                this.MainPage = new NavigationPage(new LoginPage());
+            }
+            else
+            {
+                var mainViewModel = MainViewModel.GetInstance();
+                mainViewModel.Token = Settings.Token;
+                mainViewModel.TokenType = Settings.TokenType;
+                mainViewModel.Start = new StartViewModel();
+                Application.Current.MainPage = new MasterPage();
+            }
         }
         #endregion
 

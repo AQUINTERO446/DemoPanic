@@ -5,6 +5,7 @@
     using Services;
     using Views;
     using Xamarin.Forms;
+    using DemoPanic.Helpers;
 
     public class LoginViewModel : BaseViewModel
     {
@@ -58,6 +59,9 @@
 
             this.IsRemembered = true;
             this.IsEnabled = true;
+
+            this.Email = "aquintero446@gmail.com";
+            this.Password = "123456";
         }
         #endregion
 
@@ -135,16 +139,18 @@
             }
             
             var mainViewModel = MainViewModel.GetInstance();
-            mainViewModel.Token = token;
+            mainViewModel.Token = token.AccessToken;
+            Settings.Token = token.AccessToken;
+            Settings.TokenType = token.TokenType;
 
-            await Application.Current.MainPage.DisplayAlert(
-                    "Login",
-                    "Logueado correctamente",
-                    "Aceptar");
-            this.Password = string.Empty;
+            if (this.IsRemembered)
+            {
+                Settings.Token = token.AccessToken;
+                Settings.TokenType = token.TokenType;
+            }
 
-            MainViewModel.GetInstance().Ubications = new UbicationsViewModel();
-            await App.Navigator.PushAsync(new UbicationsPage());
+            mainViewModel.Start = new StartViewModel();
+            Application.Current.MainPage = new MasterPage();
 
             this.IsRunning = false;
             this.IsEnabled = true;
