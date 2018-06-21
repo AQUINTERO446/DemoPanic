@@ -14,7 +14,7 @@
         [MaxLength(50, ErrorMessage = "El campo {0} solo puede tener un maximo de {1} caracteres.")]
         public string FirstName { get; set; }
 
-        [Display(Name = "Segundo Apellido")]
+        [Display(Name = "Apellidos")]
         [Required(ErrorMessage = "El campo {0}es requerido.")]
         [MaxLength(50, ErrorMessage = "El campo {0} solo puede tener un maximo de {1} caracteres.")]
         public string LastName { get; set; }
