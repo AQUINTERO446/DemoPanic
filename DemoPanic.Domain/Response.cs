@@ -1,4 +1,4 @@
-﻿namespace DemoPanic.Models
+﻿namespace DemoPanic.Domain
 {
     public class Response
     {

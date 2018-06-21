@@ -9,7 +9,11 @@ namespace DemoPanic.ViewModels
     public class MainViewModel
     {
         #region Properties
-        public TokenResponse Token { get; set; }
+        public TokenResponse Token
+        {
+            get;
+            set;
+        }
         public ObservableCollection<MenuItemViewModel> Menus
         {
             get;
