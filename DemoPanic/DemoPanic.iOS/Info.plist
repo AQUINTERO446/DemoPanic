@@ -48,5 +48,14 @@
   <key>NSPhotoLibraryUsageDescription</key>
   <string>Picture Picker uses photo library</string>
 
+  <key>CFBundleLocalizations</key>
+  <array>
+    <string>es</string>
+    <string>pt</string>
+  </array>
+  <key>CFBundleDevelopmentRegion</key>
+  <string>en</string>
+
+
 </dict>
 </plist>

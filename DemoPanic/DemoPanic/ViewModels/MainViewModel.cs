@@ -1,8 +1,4 @@
-﻿using DemoPanic.Models;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Text;
+﻿using System.Collections.ObjectModel;
 
 namespace DemoPanic.ViewModels
 {
@@ -54,6 +50,11 @@ namespace DemoPanic.ViewModels
             set;
         }
         public UbicationsViewModel Ubications
+        {
+            get;
+            set;
+        }
+        public RegisterViewModel Register
         {
             get;
             set;

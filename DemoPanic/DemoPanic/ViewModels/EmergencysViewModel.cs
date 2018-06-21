@@ -4,7 +4,7 @@
     using System.Windows.Input;
     using Xamarin.Forms;
     using System;
-    using DemoPanic.Interface;
+    using DemoPanic.Interfaces;
     using DemoPanic.Views;
 
     public class EmergencysViewModel

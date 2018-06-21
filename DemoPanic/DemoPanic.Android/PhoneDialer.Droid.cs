@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Android.Content;
 using Android.Telephony;
 using DemoPanic.Droid;
-using DemoPanic.Interface;
+using DemoPanic.Interfaces;
 using Xamarin.Forms;
 using Uri = Android.Net.Uri;
 

@@ -1,4 +1,4 @@
-﻿namespace DemoPanic.Interface
+﻿namespace DemoPanic.Interfaces
 {
     using System.Threading.Tasks;
     public interface IDialer
