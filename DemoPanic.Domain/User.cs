@@ -29,24 +29,24 @@
         [DataType(DataType.PhoneNumber)]
         public string Telephone { get; set; }
 
-        [Display(Name = "Imagen")]
-        public string ImagePath { get; set; }
+        //[Display(Name = "Imagen")]
+        //public string ImagePath { get; set; }
 
-        [Display(Name = "Imagen")]
-        public string ImageFullPath
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(ImagePath))
-                {
-                    return "noimage";
-                }
+        //[Display(Name = "Imagen")]
+        //public string ImageFullPath
+        //{
+        //    get
+        //    {
+        //        if (string.IsNullOrEmpty(ImagePath))
+        //        {
+        //            return "noimage";
+        //        }
 
-                return string.Format(
-                    "http://demopanicapi1.azurewebsites.net/{0}",
-                    ImagePath.Substring(1));
-            }
-        }
+        //        return string.Format(
+        //            "http://demopanicapi1.azurewebsites.net/{0}",
+        //            ImagePath.Substring(1));
+        //    }
+        //}
 
         [Display(Name = "Usuario")]
         public string FullName

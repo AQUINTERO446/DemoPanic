@@ -23,9 +23,7 @@
         <th>
             @Html.DisplayNameFor(model => model.Telephone)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ImagePath)
-        </th>
+       
         <th></th>
     </tr>
 
@@ -43,9 +41,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.Telephone)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ImagePath)
-        </td>
+        
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.UserId }) |
             @Html.ActionLink("Details", "Details", new { id=item.UserId }) |

@@ -67,7 +67,6 @@
                 Email = view.Email,
                 FirstName = view.FirstName,
                 LastName = view.LastName,
-                ImagePath = view.ImagePath,
                 UserId = view.UserId,
                 Telephone = view.Telephone
 
@@ -94,7 +93,7 @@
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "UserId,FirstName,LastName,Email,Telephone,ImagePath")] User user)
+        public async Task<ActionResult> Edit([Bind(Include = "UserId,FirstName,LastName,Email,Telephone")] User user)
         {
             if (ModelState.IsValid)
             {
