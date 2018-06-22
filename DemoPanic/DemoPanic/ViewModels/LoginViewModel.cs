@@ -111,8 +111,9 @@
                 return;
             }
 
+            var apiSecurity = Application.Current.Resources["APISecurity"].ToString();
             var token = await this.apiService.GetToken(
-                "http://demopanicAPI1.azurewebsites.net",
+                apiSecurity,
                 this.Email,
                 this.Password);
 
