@@ -24,19 +24,22 @@ namespace DemoPanic
         public App()
         {
             InitializeComponent();
-            if (string.IsNullOrEmpty(Settings.Token))
-            {
-                MainViewModel.GetInstance().Login = new LoginViewModel();
-                this.MainPage = new NavigationPage(new LoginPage());
-            }
-            else
-            {
-                var mainViewModel = MainViewModel.GetInstance();
-                mainViewModel.Token = Settings.Token;
-                mainViewModel.TokenType = Settings.TokenType;
-                mainViewModel.Start = new StartViewModel();
-                Application.Current.MainPage = new MasterPage();
-            }
+            MainViewModel.GetInstance().Login = new LoginViewModel();
+            this.MainPage = new NavigationPage(new LoginPage());
+
+            //if (string.IsNullOrEmpty(Settings.Token))
+            //{
+            //    MainViewModel.GetInstance().Login = new LoginViewModel();
+            //    this.MainPage = new NavigationPage(new LoginPage());
+            //}
+            //else
+            //{
+            //    var mainViewModel = MainViewModel.GetInstance();
+            //    mainViewModel.Token = Settings.Token;
+            //    mainViewModel.TokenType = Settings.TokenType;
+            //    mainViewModel.Start = new StartViewModel();
+            //    Application.Current.MainPage = new MasterPage();
+            //}
         }
         #endregion
 

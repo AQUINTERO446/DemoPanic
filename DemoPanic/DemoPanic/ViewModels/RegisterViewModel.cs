@@ -198,11 +198,12 @@
                 return;
             }
 
-            byte[] imageArray = null;
-            if (this.file != null)
-            {
-                imageArray = FilesHelper.ReadFully(this.file.GetStream());
-            }
+            //Este codigo se utilizan para cargar la imagen
+            //byte[] imageArray = null;
+            //if (this.file != null)
+            //{
+            //    imageArray = FilesHelper.ReadFully(this.file.GetStream());
+            //}
 
             var user = new User
             {
@@ -210,7 +211,7 @@
                 FirstName = this.FirstName,
                 LastName = this.LastName,
                 Telephone = this.Telephone,
-                ImageArray = imageArray,
+                //ImageArray = imageArray,
                 UserTypeId = 1,
                 Password = this.Password,
             };

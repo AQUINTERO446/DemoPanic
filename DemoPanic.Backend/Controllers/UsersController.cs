@@ -60,14 +60,14 @@
         //    return View(view);
         //}
 
-        private User ToUser(UserView view)
+        private User ToUser(Models.UserView view)
         {
             return new User
             {
                 Email = view.Email,
                 FirstName = view.FirstName,
                 LastName = view.LastName,
-                ImagePath = view.ImagePath,
+                //ImagePath = view.ImagePath,
                 UserId = view.UserId,
                 Telephone = view.Telephone
 

@@ -34,30 +34,31 @@
         [JsonIgnore]
         public virtual UserType UserType { get; set; }
 
-        [NotMapped]
-        public byte[] ImageArray { get; set; }
+        //Guardar Imagen como archivo en base de datos
+        //[NotMapped]
+        //public byte[] ImageArray { get; set; }
 
         [NotMapped]
         public string Password { get; set; }
 
-        [Display(Name = "Imagen")]
-        public string ImagePath { get; set; }
+        //[Display(Name = "Imagen")]
+        //public string ImagePath { get; set; }
 
-        [Display(Name = "Imagen")]
-        public string ImageFullPath
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(ImagePath))
-                {
-                    return "noimage";
-                }
+        //[Display(Name = "Imagen")]
+        //public string ImageFullPath
+        //{
+        //    get
+        //    {
+        //        if (string.IsNullOrEmpty(ImagePath))
+        //        {
+        //            return "noimage";
+        //        }
 
-                return string.Format(
-                    "http://demopanicapi1.azurewebsites.net/{0}",
-                    ImagePath.Substring(1));
-            }
-        }
+        //        return string.Format(
+        //            "http://demopanicapi1.azurewebsites.net/{0}",
+        //            ImagePath.Substring(1));
+        //    }
+        //}
 
         [Display(Name = "Usuario")]
         public string FullName
