@@ -1,18 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
-using System.Web.Http;
-using System.Web.Http.Description;
-using DemoPanic.Domain;
-
-namespace DemoPanic.API.Models
+﻿namespace DemoPanic.API.Models
 {
+    using System.Data;
+    using System.Data.Entity;
+    using System.Data.Entity.Infrastructure;
+    using System.Linq;
+    using System.Net;
+    using System.Threading.Tasks;
+    using System.Web.Http;
+    using System.Web.Http.Description;
+    using Domain;
+    using Newtonsoft.Json.Linq;
+
+
+    [RoutePrefix("api/Users")]
     public class UsersController : ApiController
     {
         private DataContext db = new DataContext();
@@ -23,11 +23,25 @@ namespace DemoPanic.API.Models
             return db.Users;
         }
 
-        // GET: api/Users/5
-        [ResponseType(typeof(User))]
-        public async Task<IHttpActionResult> GetUser(int id)
+        // GET: api/Users/aquintero446@gmail.com
+        [HttpPost]
+        [Route("GetUserByEmail")]
+        public async Task<IHttpActionResult> GetUserByEmail(JObject form)
         {
-            User user = await db.Users.FindAsync(id);
+            var email = string.Empty;
+            dynamic jsonObject = form;
+            try
+            {
+                email = jsonObject.Email.Value;
+            }
+            catch
+            {
+                return BadRequest("Missing parameter.");
+            }
+
+            var user = await db.Users.
+                Where(u => u.Email.ToLower() == email.ToLower()).
+                FirstOrDefaultAsync();
             if (user == null)
             {
                 return NotFound();
