@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Users</h2>
+<h2>Index</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -23,7 +23,6 @@
         <th>
             @Html.DisplayNameFor(model => model.Telephone)
         </th>
-       
         <th></th>
     </tr>
 
@@ -41,7 +40,6 @@
         <td>
             @Html.DisplayFor(modelItem => item.Telephone)
         </td>
-        
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.UserId }) |
             @Html.ActionLink("Details", "Details", new { id=item.UserId }) |

@@ -1,15 +1,17 @@
-﻿namespace DemoPanic.Backend.Controllers
-{
-    using System.Data.Entity;
-    using System.Threading.Tasks;
-    using System.Net;
-    using System.Web.Mvc;
-    using Models;
-    using Domain;
-    using Helpers;
-    
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Net;
+using System.Web;
+using System.Web.Mvc;
+using DemoPanic.Backend.Models;
+using DemoPanic.Domain;
 
-    [Authorize(Roles = "Admin")]
+namespace DemoPanic.Backend.Controllers
+{
     public class UsersController : Controller
     {
         private LocalDataContext db = new LocalDataContext();
@@ -46,31 +48,16 @@
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(UserView view)
+        public async Task<ActionResult> Create([Bind(Include = "UserId,FirstName,LastName,Email,Telephone")] User user)
         {
             if (ModelState.IsValid)
             {
-                var user = this.ToUser(view);
                 db.Users.Add(user);
-                UsersHelper.CreateUserASP(view.Email, "User", view.Password);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            return View(view);
-        }
-
-        private User ToUser(UserView view)
-        {
-            return new User
-            {
-                Email = view.Email,
-                FirstName = view.FirstName,
-                LastName = view.LastName,
-                UserId = view.UserId,
-                Telephone = view.Telephone
-
-            };
+            return View(user);
         }
 
         // GET: Users/Edit/5

@@ -1,11 +1,7 @@
-﻿using DemoPanic.Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace DemoPanic.Backend.Models
+﻿namespace DemoPanic.Backend.Models
 {
+    using Domain;
+
     public class LocalDataContext : DataContext
     {
         public System.Data.Entity.DbSet<DemoPanic.Domain.User> Users { get; set; }
