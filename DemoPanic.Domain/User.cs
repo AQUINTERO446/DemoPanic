@@ -15,7 +15,7 @@
         public string FirstName { get; set; }
 
         [Display(Name = "Apellidos")]
-        [Required(ErrorMessage = "El campo {0}es requerido.")]
+        [Required(ErrorMessage = "El campo {0} es requerido.")]
         [MaxLength(50, ErrorMessage = "El campo {0} solo puede tener un maximo de {1} caracteres.")]
         public string LastName { get; set; }
 
@@ -28,25 +28,6 @@
         [MaxLength(20, ErrorMessage = "El campo {0} solo puede tener un maximo de {1} caracteres.")]
         [DataType(DataType.PhoneNumber)]
         public string Telephone { get; set; }
-
-        //[Display(Name = "Imagen")]
-        //public string ImagePath { get; set; }
-
-        //[Display(Name = "Imagen")]
-        //public string ImageFullPath
-        //{
-        //    get
-        //    {
-        //        if (string.IsNullOrEmpty(ImagePath))
-        //        {
-        //            return "noimage";
-        //        }
-
-        //        return string.Format(
-        //            "http://demopanicapi1.azurewebsites.net/{0}",
-        //            ImagePath.Substring(1));
-        //    }
-        //}
 
         [Display(Name = "Usuario")]
         public string FullName
