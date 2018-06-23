@@ -111,7 +111,7 @@
             }
 
             var token = await this.apiService.GetToken(
-                "http://demopanicAPI1.azurewe<bsites.net",
+                "http://demopanicAPI1.azurewebsites.net",
                 this.Email,
                 this.Password);
 
