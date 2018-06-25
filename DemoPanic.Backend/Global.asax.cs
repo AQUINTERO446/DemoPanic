@@ -1,5 +1,6 @@
 ﻿namespace DemoPanic.Backend
 {
+    using System.Data.Entity;
     using System.Web.Mvc;
     using System.Web.Optimization;
     using System.Web.Routing;
@@ -9,6 +10,7 @@
     {
         protected void Application_Start()
         {
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<Models.LocalDataContext, Migrations.Configuration>());
             this.CheckRolesAndSuperUser();
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
