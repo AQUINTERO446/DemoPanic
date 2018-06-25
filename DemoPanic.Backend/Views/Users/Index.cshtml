@@ -23,6 +23,23 @@
         <th>
             @Html.DisplayNameFor(model => model.Telephone)
         </th>
+
+        <th>
+            User Type
+        </th>
+
+        <th>
+            Client Type
+        </th>
+
+        <th>
+            Latitud
+        </th>
+
+        <th>
+            Longitud
+        </th>
+
         <th></th>
     </tr>
 
@@ -40,10 +57,27 @@
         <td>
             @Html.DisplayFor(modelItem => item.Telephone)
         </td>
+
+        <th>
+            @Html.DisplayFor(modelItem => item.UserType.Name)
+        </th>
+
+        <th>
+            @Html.DisplayFor(modelItem => item.ClientType.Name)
+        </th>
+
+        <th>
+            @Html.DisplayFor(modelItem => item.Latitude)
+        </th>
+
+        <th>
+            @Html.DisplayFor(modelItem => item.Longitude)
+        </th>
+
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.UserId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.UserId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.UserId })
+            @Html.ActionLink("Edit", "Edit", new { id = item.UserId }) |
+            @Html.ActionLink("Details", "Details", new { id = item.UserId }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.UserId })
         </td>
     </tr>
 }

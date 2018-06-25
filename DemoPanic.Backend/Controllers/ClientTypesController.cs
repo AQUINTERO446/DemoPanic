@@ -4,111 +4,111 @@
     using System.Threading.Tasks;
     using System.Net;
     using System.Web.Mvc;
-    using DemoPanic.Backend.Models;
-    using DemoPanic.Domain;
+    using Backend.Models;
+    using Domain;
 
     [Authorize(Roles = "Admin")]
-    public class UserTypesController : Controller
+    public class ClientTypesController : Controller
     {
         private LocalDataContext db = new LocalDataContext();
 
-        // GET: UserTypes
+        // GET: ClientTypes
         public async Task<ActionResult> Index()
         {
-            return View(await db.UserTypes.ToListAsync());
+            return View(await db.ClientTypes.ToListAsync());
         }
 
-        // GET: UserTypes/Details/5
+        // GET: ClientTypes/Details/5
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            UserType userType = await db.UserTypes.FindAsync(id);
-            if (userType == null)
+            ClientType clientType = await db.ClientTypes.FindAsync(id);
+            if (clientType == null)
             {
                 return HttpNotFound();
             }
-            return View(userType);
+            return View(clientType);
         }
 
-        // GET: UserTypes/Create
+        // GET: ClientTypes/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: UserTypes/Create
+        // POST: ClientTypes/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "UserTypeId,Name")] UserType userType)
+        public async Task<ActionResult> Create([Bind(Include = "ClientTypeId,Name")] ClientType clientType)
         {
             if (ModelState.IsValid)
             {
-                db.UserTypes.Add(userType);
+                db.ClientTypes.Add(clientType);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            return View(userType);
+            return View(clientType);
         }
 
-        // GET: UserTypes/Edit/5
+        // GET: ClientTypes/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            UserType userType = await db.UserTypes.FindAsync(id);
-            if (userType == null)
+            ClientType clientType = await db.ClientTypes.FindAsync(id);
+            if (clientType == null)
             {
                 return HttpNotFound();
             }
-            return View(userType);
+            return View(clientType);
         }
 
-        // POST: UserTypes/Edit/5
+        // POST: ClientTypes/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "UserTypeId,Name")] UserType userType)
+        public async Task<ActionResult> Edit([Bind(Include = "ClientTypeId,Name")] ClientType clientType)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(userType).State = EntityState.Modified;
+                db.Entry(clientType).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            return View(userType);
+            return View(clientType);
         }
 
-        // GET: UserTypes/Delete/5
+        // GET: ClientTypes/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            UserType userType = await db.UserTypes.FindAsync(id);
-            if (userType == null)
+            ClientType clientType = await db.ClientTypes.FindAsync(id);
+            if (clientType == null)
             {
                 return HttpNotFound();
             }
-            return View(userType);
+            return View(clientType);
         }
 
-        // POST: UserTypes/Delete/5
+        // POST: ClientTypes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            UserType userType = await db.UserTypes.FindAsync(id);
-            db.UserTypes.Remove(userType);
+            ClientType clientType = await db.ClientTypes.FindAsync(id);
+            db.ClientTypes.Remove(clientType);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

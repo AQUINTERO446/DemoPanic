@@ -37,5 +37,23 @@
                 return string.Format("{0} {1}", this.FirstName, this.LastName);
             }
         }
+
+        public int? UserTypeId { get; set; }
+
+        [JsonIgnore]
+        public virtual UserType UserType { get; set; }
+
+        public int? ClientTypeId { get; set; }
+
+        [JsonIgnore]
+        public virtual ClientType ClientType { get; set; }
+
+        [MaxLength(20, ErrorMessage = "El campo {0} solo puede tener un maximo de {1} caracteres.")]
+        [DataType(DataType.PhoneNumber)]
+        public string Longitude { get; set; }
+
+        [MaxLength(20, ErrorMessage = "El campo {0} solo puede tener un maximo de {1} caracteres.")]
+        [DataType(DataType.PhoneNumber)]
+        public string Latitude { get; set; }
     }
 }
