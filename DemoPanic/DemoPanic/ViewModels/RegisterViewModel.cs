@@ -197,13 +197,14 @@
                    "Aceptar");
                 return;
             }
+            /*
 
             byte[] imageArray = null;
             if (this.file != null)
             {
                 imageArray = FilesHelper.ReadFully(this.file.GetStream());
             }
-
+            */
             var user = new User
             {
                 Email = this.Email,
