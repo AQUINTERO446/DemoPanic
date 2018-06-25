@@ -211,7 +211,7 @@
                 LastName = this.LastName,
                 Telephone = this.Telephone,
                 UserTypeId = 1,
-                //Password = this.Password,
+                Password = this.Password,
             };
 
             var apiSecurity = Application.Current.Resources["APISecurity"].ToString();
