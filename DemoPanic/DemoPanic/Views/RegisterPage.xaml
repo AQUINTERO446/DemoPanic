@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
+             xmlns:controls1="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+             x:Class="DemoPanic.Views.RegisterPage"
+             BindingContext="{Binding Main, Source={StaticResource Locator}}"
+             Title="Registrar Nuevo Usuario">
+    <ContentPage.Content>
+        <ScrollView  
+            BindingContext="{Binding Register}">
+            <StackLayout
+                Padding="5">
+                <controls1:CircleImage 
+                    Aspect="AspectFill"
+                    HeightRequest="250"
+                    Source="{Binding ImageSource}">
+                    <!--
+                    <controls:CircleImage.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ChangeImageCommand}" />
+                    </controls:CircleImage.GestureRecognizers>
+                    -->
+                </controls1:CircleImage>
+                <Label 
+                    HorizontalOptions="Center" 
+                    FontSize="Small" 
+                    Text="Toca la imagen para cambiarla." 
+                    TextColor="Black">
+                </Label>
+                <ActivityIndicator
+                    IsRunning="{Binding IsRunning, Mode=TwoWay}">
+                </ActivityIndicator>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="2*" />
+                    </Grid.ColumnDefinitions>
+                    <Label 
+                        Grid.Column="0" 
+                        Grid.Row="0" 
+                        Text="Nombres" 
+                        TextColor="Black" 
+                        VerticalOptions="Center">
+                    </Label>
+                    <Entry 
+                        Grid.Column="1" 
+                        Grid.Row="0" 
+                        Placeholder="Ingresa nombres..." 
+                        TextColor="Black" 
+                        Text="{Binding FirstName, Mode=TwoWay}">
+                    </Entry>
+                    <Label 
+                        Grid.Column="0" 
+                        Grid.Row="1" 
+                        Text="Apellidos" 
+                        TextColor="Black" 
+                        VerticalOptions="Center">
+                    </Label>
+                    <Entry 
+                        Grid.Column="1" 
+                        Grid.Row="1" 
+                        Placeholder="Ingresa apellidos..." 
+                        TextColor="Black" 
+                        Text="{Binding LastName, Mode=TwoWay}">
+                    </Entry>
+                    <Label 
+                        Grid.Column="0" 
+                        Grid.Row="2" 
+                        Text="Email" 
+                        TextColor="Black" 
+                        VerticalOptions="Center">
+                    </Label>
+                    <Entry 
+                        Keyboard="Email" 
+                        Grid.Column="1" 
+                        Grid.Row="2" 
+                        Placeholder="Ingrese email..." 
+                        TextColor="Black" 
+                        Text="{Binding Email, Mode=TwoWay}">
+                    </Entry>
+                    <Label 
+                        Grid.Column="0" 
+                        Grid.Row="3" 
+                        Text="Teléfono" 
+                        TextColor="Black" 
+                        VerticalOptions="Center">
+                    </Label>
+                    <Entry 
+                        Grid.Column="1" 
+                        Grid.Row="3" 
+                        Keyboard="Telephone" 
+                        Placeholder="Ingresa teléfono..." 
+                        TextColor="Black" 
+                        Text="{Binding Telephone, Mode=TwoWay}">
+                    </Entry>
+                    <Label 
+                        Grid.Column="0" 
+                        Grid.Row="4" 
+                        Text="Contraseña" 
+                        TextColor="Black" 
+                        VerticalOptions="Center">
+                    </Label>
+                    <Entry 
+                        Grid.Column="1" 
+                        Grid.Row="4" 
+                        IsPassword="true" 
+                        Placeholder="ingrese contraseña.." 
+                        TextColor="Black" 
+                        Text="{Binding Password, Mode=TwoWay}">
+                    </Entry>
+                    <Label 
+                        Grid.Column="0" 
+                        Grid.Row="5" 
+                        Text="Confirmación" 
+                        TextColor="Black" 
+                        VerticalOptions="Center">
+                    </Label>
+                    <Entry 
+                        Grid.Column="1" 
+                        Grid.Row="5" 
+                        IsPassword="true" 
+                        Placeholder="Ingresa la confimación de clave..." 
+                        TextColor="Black" 
+                        Text="{Binding Confirm, Mode=TwoWay}">
+                    </Entry>
+                </Grid>
+                <ActivityIndicator
+                    IsRunning="{Binding IsRunning, Mode=TwoWay}">
+                </ActivityIndicator>
+                <Button 
+                    BackgroundColor="Navy" 
+                    BorderRadius="23" 
+                    Command="{Binding RegisterCommand}" 
+                    HeightRequest="46" 
+                    IsEnabled="{Binding IsEnabled, Mode=TwoWay}" 
+                    Margin="50,0,50,0" 
+                    Text="Registrarse" 
+                    TextColor="White">
+                </Button>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
