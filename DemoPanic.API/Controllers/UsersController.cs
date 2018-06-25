@@ -9,6 +9,7 @@
     using System.Web.Http.Description;
     using DemoPanic.API.Helpers;
     using DemoPanic.Domain;
+    using Newtonsoft.Json.Linq;
 
     public class UsersController : ApiController
     {
@@ -25,6 +26,34 @@
         public async Task<IHttpActionResult> GetUser(int id)
         {
             User user = await db.Users.FindAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(user);
+        }
+
+        // POST:  [Authorize]
+
+        [HttpPost]
+        [Route("GetUserByEmail")]
+        public async Task<IHttpActionResult> GetUserByEmail(JObject form)
+        {
+            var email = string.Empty;
+            dynamic jsonObject = form;
+            try
+            {
+                email = jsonObject.Email.Value;
+            }
+            catch
+            {
+                return BadRequest("Missing parameter.");
+            }
+
+            var user = await db.Users.
+                Where(u => u.Email.ToLower() == email.ToLower()).
+                FirstOrDefaultAsync();
             if (user == null)
             {
                 return NotFound();
