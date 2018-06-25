@@ -40,6 +40,9 @@
 
         public int? UserTypeId { get; set; }
 
+        [NotMapped]
+        public string Password { get; set; }
+
         [JsonIgnore]
         public virtual UserType UserType { get; set; }
 
