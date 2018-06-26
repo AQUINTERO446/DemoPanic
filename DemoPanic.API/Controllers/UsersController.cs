@@ -11,6 +11,7 @@
     using DemoPanic.Domain;
     using Newtonsoft.Json.Linq;
 
+    [RoutePrefix("api/Users")]
     public class UsersController : ApiController
     {
         private DataContext db = new DataContext();
@@ -20,7 +21,7 @@
         {
             return db.Users;
         }
-
+        
         // GET: api/Users/5
         [ResponseType(typeof(User))]
         public async Task<IHttpActionResult> GetUser(int id)
@@ -33,7 +34,7 @@
 
             return Ok(user);
         }
-
+        
         // POST:  [Authorize]
 
         [HttpPost]
