@@ -160,8 +160,8 @@
                 apiSecurity,
                 "/api",
                 "/Users",
-                MainViewModel.GetInstance().TokenType,
-                MainViewModel.GetInstance().Token,
+                MainViewModel.GetInstance().Token.TokenType,
+                MainViewModel.GetInstance().Token.AccessToken,
                 this.User);
 
             if (!response.IsSuccess)
@@ -186,9 +186,9 @@
             var userApi = await this.apiService.GetUserByEmail(
                 apiSecurity,
                 "/api",
-                "/Users/GetUserByEmail",
-                MainViewModel.GetInstance().TokenType,
-                MainViewModel.GetInstance().Token,
+                "/Users/GetUserByEmail", 
+                MainViewModel.GetInstance().Token.TokenType,
+                MainViewModel.GetInstance().Token.AccessToken,
                 this.User.Email);
 
             var userLocal = Converter.ToUserLocal(userApi);

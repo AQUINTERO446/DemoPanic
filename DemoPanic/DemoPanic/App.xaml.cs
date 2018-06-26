@@ -31,21 +31,22 @@ namespace DemoPanic
         public App()
         {
             InitializeComponent();
-            if (string.IsNullOrEmpty(Settings.Token))
-            {
-                MainViewModel.GetInstance().Login = new LoginViewModel();
-                this.MainPage = new NavigationPage(new LoginPage());
-            }
-            else
+            if (Settings.IsRemembered == "true")
             {
                 var dataService = new DataService();
                 var user = dataService.First<UserLocal>(false);
+                var token = dataService.First<TokenResponse>(false);
                 var mainViewModel = MainViewModel.GetInstance();
-                mainViewModel.Token = Settings.Token;
-                mainViewModel.TokenType = Settings.TokenType;
+                mainViewModel.Token = token;
                 mainViewModel.User = user;
                 mainViewModel.Start = new StartViewModel();
                 Application.Current.MainPage = new MasterPage();
+
+            }
+            else
+            {
+                MainViewModel.GetInstance().Login = new LoginViewModel();
+                this.MainPage = new NavigationPage(new LoginPage());
             }
         }
         #endregion

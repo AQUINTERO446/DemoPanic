@@ -13,32 +13,18 @@
             }
         }
 
-        const string tokenId = "Token";
-        const string tokenTypeId = "TokenType";
+        const string isRemembered = "IsRemembered";
         static readonly string stringDefault = string.Empty;
 
-        public static string Token
+        public static string IsRemembered
         {
             get
             {
-                return AppSettings.GetValueOrDefault(tokenId, stringDefault);
+                return AppSettings.GetValueOrDefault(isRemembered, stringDefault);
             }
             set
             {
-                AppSettings.AddOrUpdateValue(tokenId, value);
-            }
-        }
-
-
-        public static string TokenType
-        {
-            get
-            {
-                return AppSettings.GetValueOrDefault(tokenTypeId, stringDefault);
-            }
-            set
-            {
-                AppSettings.AddOrUpdateValue(tokenTypeId, value);
+                AppSettings.AddOrUpdateValue(isRemembered, value);
             }
         }
     }

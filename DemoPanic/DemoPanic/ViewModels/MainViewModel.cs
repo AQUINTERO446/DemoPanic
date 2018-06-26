@@ -1,9 +1,5 @@
-﻿using DemoPanic.Domain;
-using DemoPanic.Models;
-using System;
-using System.Collections.Generic;
+﻿using DemoPanic.Models;
 using System.Collections.ObjectModel;
-using System.Text;
 
 namespace DemoPanic.ViewModels
 {
@@ -14,17 +10,12 @@ namespace DemoPanic.ViewModels
         #endregion
 
         #region Properties
-        public string Token
+        public TokenResponse Token
         {
             get;
             set;
         }
 
-        public string TokenType
-        {
-            get;
-            set;
-        }
         public ObservableCollection<MenuItemViewModel> Menus
         {
             get;

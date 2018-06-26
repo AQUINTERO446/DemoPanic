@@ -153,17 +153,20 @@
             }
             
             var mainViewModel = MainViewModel.GetInstance();
-            mainViewModel.Token = token.AccessToken;
-            Settings.Token = token.AccessToken;
-            Settings.TokenType = token.TokenType;
+            mainViewModel.Token = token;
             mainViewModel.User = userLocal;
 
             if (this.IsRemembered)
             {
-                Settings.Token = token.AccessToken;
-                Settings.TokenType = token.TokenType;
-                this.dataService.DeleteAllAndInsert(userLocal);
+                Settings.IsRemembered = "true";
             }
+            else
+            {
+                Settings.IsRemembered = "false";
+            }
+
+            this.dataService.DeleteAllAndInsert(userLocal);
+            this.dataService.DeleteAllAndInsert(token);
 
             mainViewModel.Start = new StartViewModel();
             Application.Current.MainPage = new MasterPage();
