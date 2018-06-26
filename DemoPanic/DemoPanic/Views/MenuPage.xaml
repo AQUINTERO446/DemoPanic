@@ -9,6 +9,13 @@
     <ContentPage.Content>
         <StackLayout
             Padding="5">
+            <Label
+                FontSize="Large"
+                FontAttributes="Bold"
+                Text="{Binding User.FullName, StringFormat='Hola: {0}'}"
+                TextColor="White">
+                
+            </Label>
             <ListView 
                 ItemsSource="{Binding Menus}"
                 BackgroundColor="Navy"

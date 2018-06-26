@@ -1,4 +1,5 @@
-﻿using DemoPanic.Models;
+﻿using DemoPanic.Domain;
+using DemoPanic.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -25,6 +26,8 @@ namespace DemoPanic.ViewModels
             get;
             set;
         }
+
+        public User User { get; set; }
         #endregion
 
         #region ViewModels

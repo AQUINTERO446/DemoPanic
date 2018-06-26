@@ -62,7 +62,7 @@
             this.IsEnabled = true;
 
             this.Email = "aquintero446@gmail.com";
-            this.Password = "123456";
+            this.Password = "654321";
         }
         #endregion
 
@@ -128,6 +128,13 @@
                 return;
             }
 
+            var user = await this.apiService.GetUserByEmail(
+                apiSecurity,
+                "/api",
+                "/Users/GetUserByEmail",
+                this.Email);
+
+
             if (string.IsNullOrEmpty(token.AccessToken))
             {
                 this.IsRunning = false;
@@ -144,6 +151,7 @@
             mainViewModel.Token = token.AccessToken;
             Settings.Token = token.AccessToken;
             Settings.TokenType = token.TokenType;
+            mainViewModel.User = user;
 
             if (this.IsRemembered)
             {
