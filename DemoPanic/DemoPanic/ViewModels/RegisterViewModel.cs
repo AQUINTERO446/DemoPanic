@@ -212,6 +212,7 @@
                 LastName = this.LastName,
                 Telephone = this.Telephone,
                 UserTypeId = 1,
+                ClientTypeId = 1,
                 Password = this.Password,
             };
 

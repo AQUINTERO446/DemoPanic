@@ -13,6 +13,7 @@
     {
         #region Services
         private ApiService apiService;
+        private DataService dataService;
         #endregion
 
         #region Attributes
@@ -52,6 +53,7 @@
         public MyProfileViewModel()
         {
             this.apiService = new ApiService();
+            this.dataService = new DataService();
             this.User = MainViewModel.GetInstance().User;
             this.IsEnabled = true;
         }
@@ -144,7 +146,7 @@
                 "/Users",
                 MainViewModel.GetInstance().TokenType,
                 MainViewModel.GetInstance().Token,
-                userDomain);
+                this.User);
 
             if (!response.IsSuccess)
             {
@@ -162,8 +164,22 @@
 
             await Application.Current.MainPage.DisplayAlert(
                 "Confirmación",
-                "Usuario registrado, ya puedes ingresar con este email y clave asignada.",
+                "Usuario modificado exitosamente.",
                "Aceptar");
+
+            var userApi = await this.apiService.GetUserByEmail(
+                apiSecurity,
+                "/api",
+                "/Users/GetUserByEmail",
+                MainViewModel.GetInstance().TokenType,
+                MainViewModel.GetInstance().Token,
+                this.User.Email);
+
+            var userLocal = Converter.ToUserLocal(userApi);
+
+            MainViewModel.GetInstance().User = userLocal;
+            this.dataService.Update(userLocal);
+
             await App.Navigator.PopAsync();
         }
 

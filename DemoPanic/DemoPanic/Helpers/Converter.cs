@@ -27,15 +27,13 @@
         {
             return new User
             {
+                UserId = user.UserId,
                 Email = user.Email,
                 LastName = user.LastName,
                 FirstName = user.FirstName,
-                ClientTypeId = user.ClientTypeId,
-                UserId = user.UserId,
-                Latitude = user.Latitude,
-                Longitude = user.Longitude,
                 Telephone = user.Telephone,
-                UserTypeId = user.UserTypeId.Value
+                UserTypeId = user.UserTypeId.Value,
+                ClientTypeId = user.ClientTypeId.Value
             };
         }
     }

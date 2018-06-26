@@ -7,8 +7,12 @@ using System.Text;
 
 namespace DemoPanic.ViewModels
 {
-    public class MainViewModel
+    public class MainViewModel : BaseViewModel
     {
+        #region Atributes
+        private UserLocal user;
+        #endregion
+
         #region Properties
         public string Token
         {
@@ -29,8 +33,8 @@ namespace DemoPanic.ViewModels
 
         public UserLocal User
         {
-            get;
-            set;
+            get { return this.user; }
+            set { SetValue(ref this.user, value); }
         }
         #endregion
 
