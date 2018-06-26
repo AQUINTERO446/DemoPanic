@@ -52,7 +52,12 @@ namespace DemoPanic
                 }
 
             }
-            
+            else
+            {
+                MainViewModel.GetInstance().Login = new LoginViewModel();
+                this.MainPage = new NavigationPage(new LoginPage());
+            }
+
         }
         #endregion
 
