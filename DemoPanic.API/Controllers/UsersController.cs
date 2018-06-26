@@ -35,9 +35,8 @@
             return Ok(user);
         }
         
-        // POST:  [Authorize]
-
         [HttpPost]
+        [Authorize]
         [Route("GetUserByEmail")]
         public async Task<IHttpActionResult> GetUserByEmail(JObject form)
         {
@@ -64,6 +63,7 @@
         }
 
         // PUT: api/Users/5
+        [Authorize]
         [ResponseType(typeof(void))]
         public async Task<IHttpActionResult> PutUser(int id, User user)
         {
