@@ -61,135 +61,135 @@
         }
         #endregion
 
-        //#region Commands
-        //public ICommand ChangePasswordCommand
-        //{
-        //    get
-        //    {
-        //        return new RelayCommand(ChangePassword);
-        //    }
-        //}
+        #region Commands
+        public ICommand ChangePasswordCommand
+        {
+            get
+            {
+                return new RelayCommand(ChangePassword);
+            }
+        }
 
-        //private async void ChangePassword()
-        //{
-        //    if (string.IsNullOrEmpty(this.CurrentPassword))
-        //    {
-        //        await Application.Current.MainPage.DisplayAlert(
-        //            "Error",
-        //            "Debes ingresar una contraseña.",
-        //            "Aceptar");
-        //        return;
-        //    }
+        private async void ChangePassword()
+        {
+            if (string.IsNullOrEmpty(this.CurrentPassword))
+            {
+                await Application.Current.MainPage.DisplayAlert(
+                    "Error",
+                    "Debes ingresar una contraseña.",
+                    "Aceptar");
+                return;
+            }
 
-        //    if (this.CurrentPassword.Length < 6)
-        //    {
-        //        await Application.Current.MainPage.DisplayAlert(
-        //            "Error",
-        //            "La contraseña debe tener al menos sies (6) carácteres.",
-        //            "Aceptar");
-        //        return;
-        //    }
+            if (this.CurrentPassword.Length < 6)
+            {
+                await Application.Current.MainPage.DisplayAlert(
+                    "Error",
+                    "La contraseña debe tener al menos sies (6) carácteres.",
+                    "Aceptar");
+                return;
+            }
 
-        //    if (this.CurrentPassword != MainViewModel.GetInstance().User.Password)
-        //    {
-        //        await Application.Current.MainPage.DisplayAlert(
-        //            "Error",
-        //            "La contraseña actual es incorrecta",
-        //            "Aceptar");
-        //        return;
-        //    }
+            if (this.CurrentPassword != MainViewModel.GetInstance().User.Password)
+            {
+                await Application.Current.MainPage.DisplayAlert(
+                    "Error",
+                    "La contraseña actual es incorrecta",
+                    "Aceptar");
+                return;
+            }
 
-        //    if (string.IsNullOrEmpty(this.NewPassword))
-        //    {
-        //        await Application.Current.MainPage.DisplayAlert(
-        //            "Error",
-        //            "Debes ingresar una contraseña.",
-        //            "Aceptar");
-        //        return;
-        //    }
+            if (string.IsNullOrEmpty(this.NewPassword))
+            {
+                await Application.Current.MainPage.DisplayAlert(
+                    "Error",
+                    "Debes ingresar una contraseña.",
+                    "Aceptar");
+                return;
+            }
 
-        //    if (this.NewPassword.Length < 6)
-        //    {
-        //        await Application.Current.MainPage.DisplayAlert(
-        //            "Error",
-        //            "La contraseña debe tener al menos sies (6) carácteres.",
-        //            "Aceptar");
-        //        return;
-        //    }
+            if (this.NewPassword.Length < 6)
+            {
+                await Application.Current.MainPage.DisplayAlert(
+                    "Error",
+                    "La contraseña debe tener al menos sies (6) carácteres.",
+                    "Aceptar");
+                return;
+            }
 
-        //    if (string.IsNullOrEmpty(this.Confirm))
-        //    {
-        //        await Application.Current.MainPage.DisplayAlert(
-        //            "Error",
-        //            "Debes ingresar la confirmación de la clave.",
-        //            "Aceptar");
-        //        return;
-        //    }
+            if (string.IsNullOrEmpty(this.Confirm))
+            {
+                await Application.Current.MainPage.DisplayAlert(
+                    "Error",
+                    "Debes ingresar la confirmación de la clave.",
+                    "Aceptar");
+                return;
+            }
 
-        //    if (this.NewPassword != this.Confirm)
-        //    {
-        //        await Application.Current.MainPage.DisplayAlert(
-        //            "Error",
-        //            "La contraseña y la confirmación no concuerdan.",
-        //            "Aceptar");
-        //        return;
-        //    }
+            if (this.NewPassword != this.Confirm)
+            {
+                await Application.Current.MainPage.DisplayAlert(
+                    "Error",
+                    "La contraseña y la confirmación no concuerdan.",
+                    "Aceptar");
+                return;
+            }
 
-        //    this.IsRunning = true;
-        //    this.IsEnabled = false;
+            this.IsRunning = true;
+            this.IsEnabled = false;
 
-        //    var connection = await this.apiService.CheckConnection();
+            var connection = await this.apiService.CheckConnection();
 
-        //    if (!connection.IsSuccess)
-        //    {
-        //        this.IsRunning = false;
-        //        this.IsEnabled = true;
-        //        await Application.Current.MainPage.DisplayAlert(
-        //            "Error",
-        //            connection.Message,
-        //            "Aceptar");
-        //        return;
-        //    }
+            if (!connection.IsSuccess)
+            {
+                this.IsRunning = false;
+                this.IsEnabled = true;
+                await Application.Current.MainPage.DisplayAlert(
+                    "Error",
+                    connection.Message,
+                    "Aceptar");
+                return;
+            }
 
-        //    var request = new ChangePasswordRequest
-        //    {
-        //        CurrentPassword = this.CurrentPassword,
-        //        Email = MainViewModel.GetInstance().User.Email,
-        //        NewPassword = this.NewPassword,
-        //    };
+            var request = new ChangePasswordRequest
+            {
+                CurrentPassword = this.CurrentPassword,
+                Email = MainViewModel.GetInstance().User.Email,
+                NewPassword = this.NewPassword,
+            };
 
-        //    var apiSecurity = Application.Current.Resources["APISecurity"].ToString();
-        //    var response = await this.apiService.ChangePassword(
-        //        apiSecurity,
-        //        "/api",
-        //        "/Users/ChangePassword",
-        //        MainViewModel.GetInstance().Token.TokenType,
-        //        MainViewModel.GetInstance().Token.AccessToken,
-        //        request);
+            var apiSecurity = Application.Current.Resources["APISecurity"].ToString();
+            var response = await this.apiService.ChangePassword(
+                apiSecurity,
+                "/api",
+                "/Users/ChangePassword",
+                MainViewModel.GetInstance().Token.TokenType,
+                MainViewModel.GetInstance().Token.AccessToken,
+                request);
 
-        //    if (!response.IsSuccess)
-        //    {
-        //        this.IsRunning = false;
-        //        this.IsEnabled = true;
-        //        await Application.Current.MainPage.DisplayAlert(
-        //            "Error",
-        //            "La contraseña no pudo ser cambiada, por favor intenta más tarde.",
-        //            "Aceptar");
-        //        return;
-        //    }
+            if (!response.IsSuccess)
+            {
+                this.IsRunning = false;
+                this.IsEnabled = true;
+                await Application.Current.MainPage.DisplayAlert(
+                    "Error",
+                    "La contraseña no pudo ser cambiada, por favor intenta más tarde.",
+                    "Aceptar");
+                return;
+            }
 
-        //    MainViewModel.GetInstance().User.Password = this.NewPassword;
-        //    this.dataService.Update(MainViewModel.GetInstance().User);
+            MainViewModel.GetInstance().User.Password = this.NewPassword;
+            this.dataService.Update(MainViewModel.GetInstance().User);
 
-        //    this.IsRunning = false;
-        //    this.IsEnabled = true;
+            this.IsRunning = false;
+            this.IsEnabled = true;
 
-        //    await Application.Current.MainPage.DisplayAlert(
-        //        "Confirmación",
-        //        "La contraseña fue cambiada exitosamente.",
-        //        "Aceptar");
-        //    await App.Navigator.PopAsync();
-        //}
-        //#endregion
+            await Application.Current.MainPage.DisplayAlert(
+                "Confirmación",
+                "La contraseña fue cambiada exitosamente.",
+                "Aceptar");
+            await App.Navigator.PopAsync();
+        }
+        #endregion
     }
 }

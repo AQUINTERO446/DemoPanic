@@ -139,6 +139,7 @@
                 this.Email);
 
             var userLocal = Helpers.Converter.ToUserLocal(user);
+            userLocal.Password = this.Password;
 
             if (string.IsNullOrEmpty(token.AccessToken))
             {
