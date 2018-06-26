@@ -1,11 +1,13 @@
 ﻿namespace DemoPanic.ViewModels
 {
     using DemoPanic.Helpers;
+    using DemoPanic.Views;
     using GalaSoft.MvvmLight.Command;
     using Models;
     using Plugin.Media;
     using Plugin.Media.Abstractions;
     using Services;
+    using System;
     using System.Windows.Input;
     using Xamarin.Forms;
 
@@ -60,6 +62,20 @@
         #endregion
 
         #region Commands
+        public ICommand ChangePasswordCommand
+        {
+            get
+            {
+                return new RelayCommand(ChangePassword);
+            }
+        }
+
+        private async void ChangePassword()
+        {
+            MainViewModel.GetInstance().ChangePassword = new ChangePasswordViewModel();
+            await App.Navigator.PushAsync(new ChangePasswordPage());
+        }
+
         public ICommand SaveCommand
         {
             get
