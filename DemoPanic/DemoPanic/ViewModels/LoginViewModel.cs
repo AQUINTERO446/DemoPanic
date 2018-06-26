@@ -12,6 +12,7 @@
     {
         #region Services
         private ApiService apiService;
+        private DataService dataService;
         #endregion
 
         #region Attributes
@@ -57,6 +58,7 @@
         public LoginViewModel()
         {
             this.apiService = new ApiService();
+            this.dataService = new DataService();
 
             this.IsRemembered = true;
             this.IsEnabled = true;
@@ -134,6 +136,7 @@
                 "/Users/GetUserByEmail",
                 this.Email);
 
+            var userLocal = Helpers.Converter.ToUserLocal(user);
 
             if (string.IsNullOrEmpty(token.AccessToken))
             {
@@ -151,12 +154,13 @@
             mainViewModel.Token = token.AccessToken;
             Settings.Token = token.AccessToken;
             Settings.TokenType = token.TokenType;
-            mainViewModel.User = user;
+            mainViewModel.User = userLocal;
 
             if (this.IsRemembered)
             {
                 Settings.Token = token.AccessToken;
                 Settings.TokenType = token.TokenType;
+                this.dataService.DeleteAllAndInsert(userLocal);
             }
 
             mainViewModel.Start = new StartViewModel();

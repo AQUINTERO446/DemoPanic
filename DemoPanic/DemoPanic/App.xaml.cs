@@ -9,6 +9,8 @@ namespace DemoPanic
     using Views;
     using DemoPanic.ViewModels;
     using DemoPanic.Helpers;
+    using DemoPanic.Services;
+    using DemoPanic.Models;
 
     public partial class App : Application
 	{
@@ -31,9 +33,12 @@ namespace DemoPanic
             }
             else
             {
+                var dataService = new DataService();
+                var user = dataService.First<UserLocal>(false);
                 var mainViewModel = MainViewModel.GetInstance();
                 mainViewModel.Token = Settings.Token;
                 mainViewModel.TokenType = Settings.TokenType;
+                mainViewModel.User = user;
                 mainViewModel.Start = new StartViewModel();
                 Application.Current.MainPage = new MasterPage();
             }

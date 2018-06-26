@@ -26,6 +26,8 @@ namespace DemoPanic.Droid
 		
 		public static void UpdateIdValues()
 		{
+			global::SQLite.Net.Platform.XamarinAndroid.Resource.String.ApplicationName = global::DemoPanic.Droid.Resource.String.ApplicationName;
+			global::SQLite.Net.Platform.XamarinAndroid.Resource.String.Hello = global::DemoPanic.Droid.Resource.String.Hello;
 			global::Xamarin.Forms.Platform.Android.Resource.Attribute.actionBarSize = global::DemoPanic.Droid.Resource.Attribute.actionBarSize;
 		}
 		
@@ -4219,6 +4221,12 @@ namespace DemoPanic.Droid
 		
 		public partial class String
 		{
+			
+			// aapt resource value: 0x7f0a004e
+			public const int ApplicationName = 2131361870;
+			
+			// aapt resource value: 0x7f0a004d
+			public const int Hello = 2131361869;
 			
 			// aapt resource value: 0x7f0a0026
 			public const int abc_action_bar_home_description = 2131361830;
