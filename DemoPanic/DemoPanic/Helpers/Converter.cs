@@ -22,5 +22,21 @@
             };
 
         }
+
+        public static User ToUserDomain(UserLocal user)
+        {
+            return new User
+            {
+                Email = user.Email,
+                LastName = user.LastName,
+                FirstName = user.FirstName,
+                ClientTypeId = user.ClientTypeId,
+                UserId = user.UserId,
+                Latitude = user.Latitude,
+                Longitude = user.Longitude,
+                Telephone = user.Telephone,
+                UserTypeId = user.UserTypeId.Value
+            };
+        }
     }
 }

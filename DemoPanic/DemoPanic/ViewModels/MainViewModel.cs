@@ -70,6 +70,12 @@ namespace DemoPanic.ViewModels
             get;
             set;
         }
+        public MyProfileViewModel MyProfile
+        {
+            get;
+            set;
+        }
+        
         #endregion
 
         #region Constructors
@@ -98,12 +104,19 @@ namespace DemoPanic.ViewModels
         #region Methods
         private void LoadMenu()
         {
+            
             this.Menus = new ObservableCollection<MenuItemViewModel>();
             this.Menus.Add(new MenuItemViewModel
             {
                 Icon = "ic_worker",
                 PageName = "WorkerPage",
-                Title = "Trabajadores"
+                Title = "Zona Receptores"
+            });
+            this.Menus.Add(new MenuItemViewModel
+            {
+                Icon = "ic_profile",
+                PageName = "MyProfilePage",
+                Title = "Mi Perfil"
             });
             this.Menus.Add(new MenuItemViewModel
             {

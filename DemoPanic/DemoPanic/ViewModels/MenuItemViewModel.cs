@@ -24,15 +24,16 @@
 
         private void Navigate()
         {
+            App.Master.IsPresented = false;
             if (this.PageName == "WorkerPage")
             {
-                //Application.Current.MainPage = new NavigationPage(
-                  //  new WorkerPage());
+                MainViewModel.GetInstance().Worker = new WorkerViewModel();
+                App.Navigator.PushAsync(new WorkerPage());
             }
             else if (this.PageName == "SettingsPage")
             {
-                //Application.Current.MainPage = new NavigationPage(
-                    //new SettingsPage());
+                MainViewModel.GetInstance().Settings = new SettingsViewModel();
+                App.Navigator.PushAsync(new SettingsPage());
             }
             else if (this.PageName == "LoginPage")
             {
@@ -44,6 +45,11 @@
                 mainViewModel.Login = new LoginViewModel();
                 Application.Current.MainPage = new NavigationPage(
                     new LoginPage());
+            }
+            else if (this.PageName == "MyProfilePage")
+            {
+                MainViewModel.GetInstance().MyProfile = new MyProfileViewModel();
+                App.Navigator.PushAsync(new MyProfilePage());
             }
         }
         #endregion

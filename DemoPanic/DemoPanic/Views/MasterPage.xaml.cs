@@ -10,6 +10,7 @@ namespace DemoPanic.Views
 		{
 			InitializeComponent ();
             App.Navigator = Navigator;
+            App.Master = this;
 		}
 
     }
