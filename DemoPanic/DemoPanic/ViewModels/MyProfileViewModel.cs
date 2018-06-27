@@ -153,7 +153,7 @@
                 imageArray = FilesHelper.ReadFully(this.file.GetStream());
             }
             */
-            var userDomain = Converter.ToUserDomain(this.User);
+            //var userDomain = Converter.ToUserDomain(this.User);
             
             var apiSecurity = Application.Current.Resources["APISecurity"].ToString();
             var response = await this.apiService.Put(
@@ -181,7 +181,7 @@
             await Application.Current.MainPage.DisplayAlert(
                 "Confirmación",
                 "Usuario modificado exitosamente.",
-               "Aceptar");
+                "Aceptar");
 
             var userApi = await this.apiService.GetUserByEmail(
                 apiSecurity,

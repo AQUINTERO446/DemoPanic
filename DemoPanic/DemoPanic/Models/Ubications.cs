@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace DemoPanic.Models
+﻿namespace DemoPanic.Models
 {
     public class Ubication
     {

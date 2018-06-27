@@ -16,9 +16,7 @@
         #region Constructors
         public UbicationsPage()
         {
-            
             InitializeComponent();
-            
             geolocatorService = new GeolocatorService();
             MoveMapToCurrentPosition();
         }

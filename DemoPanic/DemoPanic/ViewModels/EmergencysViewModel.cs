@@ -6,10 +6,16 @@
     using System;
     using DemoPanic.Interface;
     using DemoPanic.Views;
+    using DemoPanic.Services;
 
     public class EmergencysViewModel
     {
         #region Attributes
+        #endregion
+
+        #region Services
+        GeolocatorService geolocatorService;
+        private ApiService apiService;
         #endregion
 
         #region Properties
@@ -18,6 +24,49 @@
         #region Constructors
         public EmergencysViewModel()
         {
+            this.apiService = new ApiService();
+            geolocatorService = new GeolocatorService();
+        }
+
+        private async void saveCurrentPosittion()
+        {
+            await geolocatorService.GetLocation();
+            if (geolocatorService.Latitude == 0 ||
+                geolocatorService.Longitude == 0)
+            {
+                await Application.Current.MainPage.DisplayAlert(
+                    "Error",
+                    "No se a logrado ubicar tu localizacion",
+                    "Aceptar");
+                return;
+            }
+
+            var user = MainViewModel.GetInstance().User;
+            user.Latitude = geolocatorService.Latitude.ToString("0.000000");
+            user.Longitude = geolocatorService.Longitude.ToString("0.000000");
+
+            var apiSecurity = Application.Current.Resources["APISecurity"].ToString();
+            var response = await this.apiService.Put(
+                apiSecurity,
+                "/api",
+                "/Users",
+                MainViewModel.GetInstance().Token.TokenType,
+                MainViewModel.GetInstance().Token.AccessToken,
+                user);
+
+            if (!response.IsSuccess)
+            {
+               await Application.Current.MainPage.DisplayAlert(
+                    "Error",
+                    response.Message,
+                    "Aceptar");
+                return;
+            }
+
+            await Application.Current.MainPage.DisplayAlert(
+                "Confirmación",
+                "Tu pocicion esta siendo rastreada por nuestros sistemas",
+                "Aceptar");
 
         }
         #endregion

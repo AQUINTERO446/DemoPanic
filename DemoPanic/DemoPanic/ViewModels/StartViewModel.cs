@@ -4,7 +4,6 @@
     using System.Windows.Input;
     using Xamarin.Forms;
     using Views;
-    using System;
 
     public class StartViewModel
     {
@@ -18,7 +17,6 @@
         #region Constructors
         public StartViewModel()
         {
-            
         }
         #endregion
 
