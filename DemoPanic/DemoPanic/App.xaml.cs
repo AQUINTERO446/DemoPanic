@@ -119,8 +119,6 @@ namespace DemoPanic
             Application.Current.MainPage = new MasterPage();
             Settings.IsRemembered = "true";
 
-            mainViewModel.Start = new StartViewModel();
-            Application.Current.MainPage = new MasterPage();
         }
 
         protected override void OnStart()
