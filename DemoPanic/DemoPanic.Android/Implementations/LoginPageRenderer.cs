@@ -14,6 +14,7 @@ namespace DemoPanic.Droid.Implementations
 
     public class LoginPageRenderer : PageRenderer
     {
+#pragma warning disable CS0618 // Type or member is obsolete
         public LoginPageRenderer()
         {
             var activity = this.Context as Activity;
@@ -23,6 +24,8 @@ namespace DemoPanic.Droid.Implementations
                 scope: "email",
                 authorizeUrl: new Uri("https://www.facebook.com/dialog/oauth/"),
                 redirectUrl: new Uri("https://www.facebook.com/connect/login_success.html"));
+            auth.AllowCancel = true; //back button allowed 
+            auth.Title = "Facebook"; //pfffff :)
 
             auth.Completed += async (sender, eventArgs) =>
             {
@@ -40,6 +43,7 @@ namespace DemoPanic.Droid.Implementations
 
             activity.StartActivity(auth.GetUI(activity));
         }
+#pragma warning restore CS0618 // Type or member is obsolete
 
         private async Task<FacebookResponse> GetFacebookProfileAsync(string accessToken)
         {
