@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="ClientType.cs" />
     <Compile Include="DataContext.cs" />
+    <Compile Include="FacebookResponse.cs" />
     <Compile Include="Response.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

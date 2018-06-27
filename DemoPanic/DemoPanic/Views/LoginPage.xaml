@@ -101,6 +101,13 @@
                     Orientation="Vertical"
                     VerticalOptions="EndAndExpand">
                     <Image
+                        Source="facebook_logo"
+                        WidthRequest="100">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding LoginFacebookComand}"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Image
                         Source="ic_email"
                         HeightRequest="200">
                         <Image.GestureRecognizers>
