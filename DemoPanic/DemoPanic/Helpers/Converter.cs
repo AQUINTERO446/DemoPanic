@@ -36,5 +36,18 @@
                 ClientTypeId = user.ClientTypeId.Value
             };
         }
+
+        public static Ubication ToUserUbication(UserHelpRequest user)
+        {
+            return new Ubication
+            {
+                UbicationId = user.UserId,
+                Description = user.FullName,
+                Latitude = Convert.ToDouble(user.Latitude),
+                Longitude = Convert.ToDouble(user.Longitude),
+                Phone = user.Telephone
+
+            };
+        }
     }
 }

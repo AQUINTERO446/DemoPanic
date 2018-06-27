@@ -1,6 +1,7 @@
 ﻿namespace DemoPanic.API.Controllers
 {
     using System;
+    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     using System.Data.Entity.Validation;
@@ -39,7 +40,31 @@
 
             return Ok(user);
         }
+
+
         
+        [HttpPost]
+        [Authorize]
+        [Route("GetUsersByClientType")]
+        public async Task<IHttpActionResult> GetUsersByClientType(JObject form)
+        {
+            int? clientTypeId = null;
+            dynamic jsonObject = form;
+            try
+            {
+                clientTypeId = jsonObject.ClientTypeId;
+            }
+            catch
+            {
+                return BadRequest("Missing parameter.");
+            }
+
+            var user = await db.Users.
+                Where(u => u.ClientTypeId == clientTypeId).ToArrayAsync();
+
+            return Ok(user);
+        }
+
         [HttpPost]
         [Authorize]
         [Route("GetUserByEmail")]

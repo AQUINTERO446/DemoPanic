@@ -9,6 +9,7 @@
     [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class UbicationsPage : ContentPage
 	{
+
         #region Services
         GeolocatorService geolocatorService;
         #endregion
@@ -51,7 +52,7 @@
                 MyMap.Pins.Add(pin);
             }
         }
-
+        /*
         private void RefreshLocation_Clicked(object sender, EventArgs e)
         {
             RefreshLocation();
@@ -70,7 +71,7 @@
 
             }
         }
-
+        */
         #endregion
 
     }

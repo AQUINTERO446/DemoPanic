@@ -7,6 +7,9 @@
     using DemoPanic.Interface;
     using DemoPanic.Views;
     using DemoPanic.Services;
+    using System.Threading.Tasks;
+    using System.Collections.Generic;
+    using DemoPanic.Models;
 
     public class EmergencysViewModel
     {
@@ -26,6 +29,7 @@
         {
             this.apiService = new ApiService();
             geolocatorService = new GeolocatorService();
+            this.saveCurrentPosittion();
         }
 
         private async void saveCurrentPosittion()
@@ -83,6 +87,9 @@
         private async void AmbulanceAlert()
         {
             MainViewModel.GetInstance().Ubications = new UbicationsViewModel();
+
+            var ubications = GetUbications(2);
+
             await App.Navigator.PushAsync(new UbicationsPage());
             return;
         }
@@ -142,6 +149,19 @@
                 OnCall("*611");
             }
             return;
+        }
+
+        private async Task<List<Ubication>> GetUbications(int clientTypeId)
+        {
+            var apiSecurity = Application.Current.Resources["APISecurity"].ToString();
+            var user = await this.apiService.GetUsersByClientType(
+                apiSecurity,
+                "/api",
+                "/Users/GetUsersByClientType",
+                MainViewModel.GetInstance().Token.TokenType,
+                MainViewModel.GetInstance().Token.AccessToken,
+                clientTypeId);
+            return user;
         }
         #endregion
 

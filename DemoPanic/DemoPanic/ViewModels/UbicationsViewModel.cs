@@ -1,4 +1,5 @@
 ﻿using DemoPanic.Models;
+using DemoPanic.Services;
 using DemoPanic.Views;
 using GalaSoft.MvvmLight.Command;
 using System;
@@ -7,12 +8,14 @@ using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 
 namespace DemoPanic.ViewModels
 {
-    public class UbicationsViewModel
+    public class UbicationsViewModel : BaseViewModel
     {
+
         #region Constructors
         public UbicationsViewModel()
         {
@@ -48,9 +51,9 @@ namespace DemoPanic.ViewModels
                 });
             }
         }
-
         private List<Ubication> GetListUbications()
         {
+
             const double MAXIMUM_LATITUD = 7.142354;
             const double MINIMUM_LATITUD = 7.058251;
             const double MAXIMA_LONGITUDD = -73.076229;
@@ -79,20 +82,6 @@ namespace DemoPanic.ViewModels
             }
             return list;
         }
-        /*
-        public ICommand RefreshLocationCommand
-        {
-            get
-            {
-                return new RelayCommand(RefreshLocation);
-            }
-        }
-
-        public void RefreshLocation()
-        {
-            
-        }
-        */
         #endregion
 
         #region Singleton

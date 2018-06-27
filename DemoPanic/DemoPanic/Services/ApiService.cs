@@ -555,7 +555,8 @@
             }
         }
 
-        public async Task<Models.FacebookResponse> GetFacebook(string accessToken)
+        public async Task<Models.FacebookResponse> GetFacebook(
+            string accessToken)
         {
             var requestUrl = "https://graph.facebook.com/v2.8/me/?fields=name," +
                 "picture.width(999),cover,age_range,devices,email,gender," +
@@ -568,6 +569,53 @@
             return facebookResponse;
         }
 
+        public async Task<List<Ubication>> GetUsersByClientType(
+           string urlBase,
+           string servicePrefix,
+           string controller,
+           string tokenType,
+           string accessToken,
+           int? clientType)
+        {
+            try
+            {
+                var model = new HelpRequest
+                {
+                    ClientTypeId = clientType,
+                };
+
+                var request = JsonConvert.SerializeObject(model);
+                var content = new StringContent(
+                    request,
+                    Encoding.UTF8,
+                    "application/json");
+                var client = new HttpClient();
+                client.DefaultRequestHeaders.Authorization =
+                    new AuthenticationHeaderValue(tokenType, accessToken);
+                client.BaseAddress = new Uri(urlBase);
+                var url = string.Format("{0}{1}", servicePrefix, controller);
+                var response = await client.PostAsync(url, content);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return null;
+                }
+
+                var result = await response.Content.ReadAsStringAsync();
+                var list = JsonConvert.DeserializeObject<List<UserHelpRequest>>(result);
+                var listOut = new List<Ubication>();
+                foreach (UserHelpRequest userLocal in list)
+                {
+                    listOut.Add(
+                        Helpers.Converter.ToUserUbication(userLocal));
+                }
+                return listOut;
+            }
+            catch
+            {
+                return null;
+            }
+        }
 
     }
 }
