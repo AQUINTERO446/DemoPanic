@@ -1,6 +1,7 @@
 ﻿namespace DemoPanic.API.Controllers
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
@@ -50,8 +51,8 @@
         public async Task<IHttpActionResult> GetUsersByClientType(JObject form)
         {
             int? clientTypeId = null;
-            double latitud = 0;
-            double longitud = 0;
+            decimal? latitud = null;
+            decimal? longitud = null;
             dynamic jsonObject = form;
             try
             {
@@ -63,32 +64,49 @@
             {
                 return BadRequest("Missing parameter.");
             }
-            
+
+            double distance = 1;
+            //DistanceCalculation.GeoCodeCalc.CalcDistance(lowestLat, lowestLong, highestLat, highestLong, DistanceCalculation.GeoCodeCalcMeasurement.Kilometers)
             var user = await db.Users.
                 Where(u => u.ClientTypeId == clientTypeId).
                     ToArrayAsync();
-            return Ok(user);
+
+            if (user== null)
+            {
+                return null;
+            }
+
+            List<User> userOut = new List<User>();
+            IEnumerator indexUser = user.GetEnumerator();
+
+            while (userOut.Count < 10  && distance < 20)
+            {
+                indexUser.MoveNext();
+                if (!indexUser.MoveNext())
+                {
+                    indexUser.Reset();
+                    distance++;
+                }
+                else
+                {
+                    User help = (User)indexUser.Current;
+                    if (DistanceCalculation.GeoCodeCalc.CalcDistance(
+                        (double)help.Latitude,
+                        (double)help.Longitude,
+                        (double)latitud,
+                        (double)longitud,
+                        DistanceCalculation.GeoCodeCalcMeasurement.Kilometers) <
+                    distance)
+                    {
+                        userOut.Add(help);
+                    }
+                }
+                
+
+            }
+            return Ok(userOut);
         }
 
-        private bool Distance(string Latitude, double LatitudUser, string Longitude, double LongitudUser)
-        {
-            NumberFormatInfo provider = new NumberFormatInfo();
-            provider.NumberDecimalSeparator = ",";
-            int distance = 10; //Distancia en kilometros
-            double latitud = Convert.ToDouble(Latitude, provider);
-            double longitude = Convert.ToDouble(Longitude, provider);
-            if (DistanceCalculation.GeoCodeCalc.CalcDistance(
-                LatitudUser,
-                LongitudUser,
-                latitud,
-                longitude,
-                DistanceCalculation.GeoCodeCalcMeasurement.Kilometers)
-                < distance)
-            {
-                return true;
-            }
-            return false;
-        }
 
         [HttpPost]
         [Authorize]
