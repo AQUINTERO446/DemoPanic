@@ -1,6 +1,7 @@
 ﻿namespace DemoPanic.Helpers
 {
     using System;
+    using System.Globalization;
     using DemoPanic.Domain;
     using DemoPanic.Models;
 
@@ -39,12 +40,15 @@
 
         public static Ubication ToUserUbication(UserHelpRequest user)
         {
+            NumberFormatInfo provider = new NumberFormatInfo();
+            provider.NumberDecimalSeparator = ".";
+
             return new Ubication
             {
                 UbicationId = user.UserId,
                 Description = user.FullName,
-                Latitude = Convert.ToDouble(user.Latitude),
-                Longitude = Convert.ToDouble(user.Longitude),
+                Latitude = Convert.ToDouble(user.Latitude, provider),
+                Longitude = Convert.ToDouble(user.Longitude, provider),
                 Phone = user.Telephone
 
             };

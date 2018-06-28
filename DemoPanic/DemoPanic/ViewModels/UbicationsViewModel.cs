@@ -29,16 +29,22 @@ namespace DemoPanic.ViewModels
             get;
             set;
         }
+
+        public List<Ubication> Ubications
+        {
+            get;
+            set;
+        }
         #endregion
 
         #region Methods
         public void LoadPins()
         {
             //Aqui response tendra la lista de Ubicaciones
-            var ubications = GetListUbications();
+            //var ubications = GetListUbications();
 
             Pins = new ObservableCollection<Pin>();
-            foreach (var ubication in ubications)
+            foreach (var ubication in Ubications)
             {
                 Pins.Add(new Pin
                 {

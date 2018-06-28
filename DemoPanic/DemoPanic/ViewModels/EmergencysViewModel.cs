@@ -87,8 +87,7 @@
         private async void AmbulanceAlert()
         {
             MainViewModel.GetInstance().Ubications = new UbicationsViewModel();
-
-            var ubications = GetUbications(2);
+            MainViewModel.GetInstance().Ubications.Ubications = await GetUbications(2);
 
             await App.Navigator.PushAsync(new UbicationsPage());
             return;
