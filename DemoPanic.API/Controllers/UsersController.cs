@@ -45,6 +45,7 @@
 
         
         [HttpPost]
+        [Authorize]
         [Route("GetUsersByClientType")]
         public async Task<IHttpActionResult> GetUsersByClientType(JObject form)
         {
@@ -62,15 +63,9 @@
             {
                 return BadRequest("Missing parameter.");
             }
-            NumberFormatInfo provider = new NumberFormatInfo();
-            provider.NumberDecimalSeparator = ",";
-
+            
             var user = await db.Users.
                 Where(u => u.ClientTypeId == clientTypeId).
-                Select(j => Math.Pow(69.1 * (
-                Convert.ToDouble(j.Latitude, provider) - latitud), 2) +
-                Math.Pow(69.1 * (longitud - Convert.ToDouble(j.Latitude, provider)) 
-                * Math.Cos(Convert.ToDouble(j.Latitude, provider) / 57.3), 2) < 3).
                     ToArrayAsync();
             return Ok(user);
         }

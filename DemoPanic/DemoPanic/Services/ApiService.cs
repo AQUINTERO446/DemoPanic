@@ -582,6 +582,9 @@
                 var model = new HelpRequest
                 {
                     ClientTypeId = clientType,
+                    Latitud = 1,
+                    Longitud = 3
+                   
                 };
 
                 var request = JsonConvert.SerializeObject(model);
@@ -602,12 +605,13 @@
                 }
 
                 var result = await response.Content.ReadAsStringAsync();
-                var list = JsonConvert.DeserializeObject<List<UserHelpRequest>>(result);
+                var list = JsonConvert.DeserializeObject<List<User>>(result);
                 var listOut = new List<Ubication>();
-                foreach (UserHelpRequest userLocal in list)
+                foreach (User userLocal in list)
                 {
                     listOut.Add(
-                        Helpers.Converter.ToUserUbication(userLocal));
+                        Helpers.Converter.ToUserUbication(
+                            userLocal));
                 }
                 return listOut;
             }

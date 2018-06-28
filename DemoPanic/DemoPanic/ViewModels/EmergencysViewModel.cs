@@ -31,10 +31,10 @@
             this.apiService = new ApiService();
             geolocatorService = new GeolocatorService();
             this.saveCurrentPosittion();
-            //this.escribirBaseDatos();
+            //this.escribirBaseDatos(2);
         }
-        /*
-        private async void escribirBaseDatos()
+        
+        private async void escribirBaseDatos(int clientTypeId)
         {
             const double MAXIMUM_LATITUD = 7.142354;
             const double MINIMUM_LATITUD = 6.970838;
@@ -44,7 +44,6 @@
             Random rnd = new Random();
 
             int disponibles = 100;
-            int clientTypeId = 3;
             var apiSecurity = Application.Current.Resources["APISecurity"].ToString();
             for (int i = 1; i <= disponibles; i++)
             {
@@ -61,8 +60,8 @@
                     UserTypeId = 1,
                     Password = "654321",
                     ClientTypeId = clientTypeId,
-                    Latitude = latitude.ToString("0.000000"),
-                    Longitude = longitude.ToString("0.000000")
+                    Latitude = Convert.ToDecimal(latitude),
+                    Longitude = Convert.ToDecimal(longitude)
 
                 };
                 var response = await this.apiService.Post(
@@ -82,7 +81,7 @@
 
             }
         }
-        */
+        
         private async void saveCurrentPosittion()
         {
             await geolocatorService.GetLocation();
@@ -97,8 +96,8 @@
             }
 
             var user = MainViewModel.GetInstance().User;
-            user.Latitude = geolocatorService.Latitude.ToString("0.000000");
-            user.Longitude = geolocatorService.Longitude.ToString("0.000000");
+            user.Latitude = geolocatorService.Latitude;
+            user.Longitude = geolocatorService.Longitude;
 
             var apiSecurity = Application.Current.Resources["APISecurity"].ToString();
             var response = await this.apiService.Put(

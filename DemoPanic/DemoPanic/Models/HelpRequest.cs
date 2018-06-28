@@ -7,5 +7,16 @@
             get;
             set;
         }
+
+        public decimal? Longitud
+        {
+            get;
+            set;
+        }
+        public decimal? Latitud
+        {
+            get;
+            set;
+        }
     }
 }

@@ -16,8 +16,8 @@
                 FirstName = user.FirstName,
                 ClientTypeId = user.ClientTypeId,
                 UserId = user.UserId,
-                Latitude = user.Latitude,
-                Longitude = user.Longitude,
+                Latitude = (double) user.Latitude,
+                Longitude = (double) user.Longitude,
                 Telephone = user.Telephone,
                 UserTypeId = user.UserTypeId
             };
@@ -38,17 +38,14 @@
             };
         }
 
-        public static Ubication ToUserUbication(UserHelpRequest user)
+        public static Ubication ToUserUbication(User user)
         {
-            NumberFormatInfo provider = new NumberFormatInfo();
-            provider.NumberDecimalSeparator = ".";
-
             return new Ubication
             {
                 UbicationId = user.UserId,
                 Description = user.FullName,
-                Latitude = Convert.ToDouble(user.Latitude, provider),
-                Longitude = Convert.ToDouble(user.Longitude, provider),
+                Latitude = (double) user.Latitude,
+                Longitude = (double) user.Longitude,
                 Phone = user.Telephone
 
             };
