@@ -10,6 +10,7 @@
     using System.Threading.Tasks;
     using System.Collections.Generic;
     using DemoPanic.Models;
+    using DemoPanic.Domain;
 
     public class EmergencysViewModel
     {
@@ -30,8 +31,58 @@
             this.apiService = new ApiService();
             geolocatorService = new GeolocatorService();
             this.saveCurrentPosittion();
+            //this.escribirBaseDatos();
         }
+        /*
+        private async void escribirBaseDatos()
+        {
+            const double MAXIMUM_LATITUD = 7.142354;
+            const double MINIMUM_LATITUD = 6.970838;
+            const double MAXIMA_LONGITUDD = -73.076229;
+            const double MINIMUM_LONGITUD = -73.180674;
 
+            Random rnd = new Random();
+
+            int disponibles = 100;
+            int clientTypeId = 3;
+            var apiSecurity = Application.Current.Resources["APISecurity"].ToString();
+            for (int i = 1; i <= disponibles; i++)
+            {
+                double latitude =
+                            rnd.NextDouble() * (MAXIMUM_LATITUD - MINIMUM_LATITUD) + MINIMUM_LATITUD;
+                double longitude =
+                            rnd.NextDouble() * (MAXIMA_LONGITUDD - MINIMUM_LONGITUD) + MINIMUM_LONGITUD;
+                var user = new User
+                {
+                    Email = i + "num" + clientTypeId + "user@random.com",
+                    FirstName = i + "Random" + clientTypeId + "FirstName",
+                    LastName = i + "Random" + clientTypeId + "LastName",
+                    Telephone = "-555-555-" + i,
+                    UserTypeId = 1,
+                    Password = "654321",
+                    ClientTypeId = clientTypeId,
+                    Latitude = latitude.ToString("0.000000"),
+                    Longitude = longitude.ToString("0.000000")
+
+                };
+                var response = await this.apiService.Post(
+                apiSecurity,
+                "/api",
+                "/Users",
+                user);
+
+                if (!response.IsSuccess)
+                {
+                    Console.WriteLine("----Error    " + response.Message);
+                }
+                else
+                {
+                    Console.WriteLine("Success -- "+i);
+                }
+
+            }
+        }
+        */
         private async void saveCurrentPosittion()
         {
             await geolocatorService.GetLocation();
@@ -87,7 +138,7 @@
         private async void AmbulanceAlert()
         {
             MainViewModel.GetInstance().Ubications = new UbicationsViewModel();
-            MainViewModel.GetInstance().Ubications.Ubications = await GetUbications(2);
+            MainViewModel.GetInstance().Ubications.Ubications = await GetUbications(3);
 
             await App.Navigator.PushAsync(new UbicationsPage());
             return;
@@ -125,6 +176,7 @@
         private async void PoliceAlert()
         {
             MainViewModel.GetInstance().Ubications = new UbicationsViewModel();
+            MainViewModel.GetInstance().Ubications.Ubications = await GetUbications(2);
             await App.Navigator.PushAsync(new UbicationsPage());
             return;
         }
