@@ -5,6 +5,7 @@
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     using System.Data.Entity.Validation;
+    using System.Globalization;
     using System.Linq;
     using System.Net;
     using System.Threading.Tasks;
@@ -44,25 +45,54 @@
 
         
         [HttpPost]
-        [Authorize]
         [Route("GetUsersByClientType")]
         public async Task<IHttpActionResult> GetUsersByClientType(JObject form)
         {
             int? clientTypeId = null;
+            double latitud = 0;
+            double longitud = 0;
             dynamic jsonObject = form;
             try
             {
                 clientTypeId = jsonObject.ClientTypeId;
+                latitud = jsonObject.Latitud;
+                longitud = jsonObject.Longitud;
             }
             catch
             {
                 return BadRequest("Missing parameter.");
             }
+            NumberFormatInfo provider = new NumberFormatInfo();
+            provider.NumberDecimalSeparator = ",";
 
             var user = await db.Users.
-                Where(u => u.ClientTypeId == clientTypeId).ToArrayAsync();
-
+                Where(u => u.ClientTypeId == clientTypeId).
+                Select(j => Math.Pow(69.1 * (
+                Convert.ToDouble(j.Latitude, provider) - latitud), 2) +
+                Math.Pow(69.1 * (longitud - Convert.ToDouble(j.Latitude, provider)) 
+                * Math.Cos(Convert.ToDouble(j.Latitude, provider) / 57.3), 2) < 3).
+                    ToArrayAsync();
             return Ok(user);
+        }
+
+        private bool Distance(string Latitude, double LatitudUser, string Longitude, double LongitudUser)
+        {
+            NumberFormatInfo provider = new NumberFormatInfo();
+            provider.NumberDecimalSeparator = ",";
+            int distance = 10; //Distancia en kilometros
+            double latitud = Convert.ToDouble(Latitude, provider);
+            double longitude = Convert.ToDouble(Longitude, provider);
+            if (DistanceCalculation.GeoCodeCalc.CalcDistance(
+                LatitudUser,
+                LongitudUser,
+                latitud,
+                longitude,
+                DistanceCalculation.GeoCodeCalcMeasurement.Kilometers)
+                < distance)
+            {
+                return true;
+            }
+            return false;
         }
 
         [HttpPost]

@@ -1,6 +1,7 @@
 ﻿namespace DemoPanic.Domain
 {
     using Newtonsoft.Json;
+    using System;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
@@ -58,5 +59,12 @@
         [MaxLength(20, ErrorMessage = "El campo {0} solo puede tener un maximo de {1} caracteres.")]
         [DataType(DataType.PhoneNumber)]
         public string Latitude { get; set; }
+
+        [DecimalPrecision(8, 6)]
+        public Nullable<decimal> Longituden { get; set; }
+
+        [DecimalPrecision(8, 6)]
+        public Nullable<decimal> Latituden { get; set; }
+
     }
 }
