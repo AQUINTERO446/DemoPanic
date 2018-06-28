@@ -8,6 +8,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using DemoPanic.Domain;
+using DemoPanic.Backend.Models;
+using DemoPanic.Backend.Helpers;
 
 namespace DemoPanic.Backend.Controllers
 {
@@ -50,18 +52,32 @@ namespace DemoPanic.Backend.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "UserId,FirstName,LastName,Email,Telephone,UserTypeId,ClientTypeId,Longitude,Latitude,Longituden,Latituden")] User user)
+        public async Task<ActionResult> Create(UserView view)
         {
             if (ModelState.IsValid)
             {
+                var user = ToUser(view);
                 db.Users.Add(user);
                 await db.SaveChangesAsync();
+                UsersHelper.CreateUserASP(view.Email, "User", view.Password);
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ClientTypeId = new SelectList(db.ClientTypes, "ClientTypeId", "Name", user.ClientTypeId);
-            ViewBag.UserTypeId = new SelectList(db.UserTypes, "UserTypeId", "Name", user.UserTypeId);
-            return View(user);
+            ViewBag.ClientTypeId = new SelectList(db.ClientTypes, "ClientTypeId", "Name", view.ClientTypeId);
+            ViewBag.UserTypeId = new SelectList(db.UserTypes, "UserTypeId", "Name", view.UserTypeId);
+            return View(view);
+        }
+
+        private User ToUser(UserView view)
+        {
+            return new User
+            {
+                Email = view.Email,
+                FirstName = view.FirstName,
+                LastName = view.LastName,
+                Telephone = view.Telephone,
+                UserId = view.UserId
+            };
         }
 
         // GET: Users1/Edit/5
@@ -86,7 +102,7 @@ namespace DemoPanic.Backend.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "UserId,FirstName,LastName,Email,Telephone,UserTypeId,ClientTypeId,Longitude,Latitude,Longituden,Latituden")] User user)
+        public async Task<ActionResult> Edit([Bind(Include = "UserId,FirstName,LastName,Email,Telephone,UserTypeId,ClientTypeId,Longitude,Latitude")] User user)
         {
             if (ModelState.IsValid)
             {

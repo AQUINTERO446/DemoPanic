@@ -52,19 +52,11 @@
         [JsonIgnore]
         public virtual ClientType ClientType { get; set; }
 
-        [MaxLength(20, ErrorMessage = "El campo {0} solo puede tener un maximo de {1} caracteres.")]
-        [DataType(DataType.PhoneNumber)]
-        public string Longitude { get; set; }
-
-        [MaxLength(20, ErrorMessage = "El campo {0} solo puede tener un maximo de {1} caracteres.")]
-        [DataType(DataType.PhoneNumber)]
-        public string Latitude { get; set; }
+        [DecimalPrecision(8, 6)]
+        public decimal? Longitude { get; set; }
 
         [DecimalPrecision(8, 6)]
-        public Nullable<decimal> Longituden { get; set; }
-
-        [DecimalPrecision(8, 6)]
-        public Nullable<decimal> Latituden { get; set; }
+        public decimal? Latitude { get; set; }
 
     }
 }
