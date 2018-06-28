@@ -575,16 +575,18 @@
            string controller,
            string tokenType,
            string accessToken,
-           int? clientType)
+           int? clientType,
+           decimal? latitud,
+           decimal? longitud)
         {
             try
             {
                 var model = new HelpRequest
                 {
                     ClientTypeId = clientType,
-                    Latitud = 1,
-                    Longitud = 3
-                   
+                    Latitud = latitud,
+                    Longitud = longitud
+
                 };
 
                 var request = JsonConvert.SerializeObject(model);

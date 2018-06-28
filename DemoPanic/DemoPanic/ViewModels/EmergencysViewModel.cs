@@ -203,6 +203,8 @@
 
         private async Task<List<Ubication>> GetUbications(int clientTypeId)
         {
+            var userLocal = MainViewModel.GetInstance().User;
+
             var apiSecurity = Application.Current.Resources["APISecurity"].ToString();
             var user = await this.apiService.GetUsersByClientType(
                 apiSecurity,
@@ -210,7 +212,10 @@
                 "/Users/GetUsersByClientType",
                 MainViewModel.GetInstance().Token.TokenType,
                 MainViewModel.GetInstance().Token.AccessToken,
-                clientTypeId);
+                clientTypeId,
+                (decimal)userLocal.Latitude,
+                (decimal)userLocal.Longitude
+                );
             return user;
         }
         #endregion
