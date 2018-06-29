@@ -199,7 +199,6 @@
     <Compile Include="Controllers\ClientTypesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\ParametersController.cs" />
     <Compile Include="Controllers\Users1Controller.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\UserTypesController.cs" />
@@ -303,11 +302,6 @@
     <Content Include="Views\Users1\Details.cshtml" />
     <Content Include="Views\Users1\Edit.cshtml" />
     <Content Include="Views\Users1\Index.cshtml" />
-    <Content Include="Views\Parameters\Create.cshtml" />
-    <Content Include="Views\Parameters\Delete.cshtml" />
-    <Content Include="Views\Parameters\Details.cshtml" />
-    <Content Include="Views\Parameters\Edit.cshtml" />
-    <Content Include="Views\Parameters\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

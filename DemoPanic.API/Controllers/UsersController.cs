@@ -65,8 +65,19 @@
                 return BadRequest("Missing parameter.");
             }
 
-            double distance = 1;
-            //DistanceCalculation.GeoCodeCalc.CalcDistance(lowestLat, lowestLong, highestLat, highestLong, DistanceCalculation.GeoCodeCalcMeasurement.Kilometers)
+            var radiusParameter = await db.Parameters.FindAsync(1);
+            var rangeParameter = await db.Parameters.FindAsync(2);
+            var minimumServicesParameter = await db.Parameters.FindAsync(3);
+
+            if (radiusParameter == null || rangeParameter == null)
+            {
+                return null;
+            }
+
+            double radius = (double) Convert.ToDouble(radiusParameter.Parameter);
+            double range = (double) Convert.ToDouble(rangeParameter.Parameter);
+            double minimumServices = (double)Convert.ToDouble(minimumServicesParameter.Parameter);
+
             var user = await db.Users.
                 Where(u => u.ClientTypeId == clientTypeId).
                     ToArrayAsync();
@@ -79,13 +90,13 @@
             List<User> userOut = new List<User>();
             IEnumerator indexUser = user.GetEnumerator();
 
-            while (userOut.Count < 10  && distance < 20)
+            while (userOut.Count < minimumServices && radius < range)
             {
                 indexUser.MoveNext();
                 if (!indexUser.MoveNext())
                 {
                     indexUser.Reset();
-                    distance++;
+                    radius+=radius;
                 }
                 else
                 {
@@ -96,7 +107,7 @@
                         (double)latitud,
                         (double)longitud,
                         DistanceCalculation.GeoCodeCalcMeasurement.Kilometers) <
-                    distance)
+                    radius)
                     {
                         userOut.Add(help);
                     }
