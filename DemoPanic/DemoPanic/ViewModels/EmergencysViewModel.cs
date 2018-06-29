@@ -96,8 +96,8 @@
             }
 
             var user = MainViewModel.GetInstance().User;
-            user.Latitude = geolocatorService.Latitude;
-            user.Longitude = geolocatorService.Longitude;
+            user.Latitude = (decimal)geolocatorService.Latitude;
+            user.Longitude = (decimal)geolocatorService.Longitude;
 
             var apiSecurity = Application.Current.Resources["APISecurity"].ToString();
             var response = await this.apiService.Put(

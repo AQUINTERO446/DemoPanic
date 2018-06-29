@@ -16,10 +16,11 @@
                 FirstName = user.FirstName,
                 ClientTypeId = user.ClientTypeId,
                 UserId = user.UserId,
-                Latitude = (double) user.Latitude,
-                Longitude = (double) user.Longitude,
+                Latitude = user.Latitude,
+                Longitude = user.Longitude,
                 Telephone = user.Telephone,
                 UserTypeId = user.UserTypeId
+
             };
 
         }
