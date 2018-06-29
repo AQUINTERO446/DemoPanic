@@ -54,6 +54,7 @@
     <Compile Include="DataContext.cs" />
     <Compile Include="DecimalPrecisionAttribute.cs" />
     <Compile Include="FacebookResponse.cs" />
+    <Compile Include="Parameters.cs" />
     <Compile Include="Response.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -11,7 +11,6 @@ namespace DemoPanic.Backend.Migrations
         {
             AutomaticMigrationsEnabled = true;
             AutomaticMigrationDataLossAllowed = true;
-            ContextKey = "DemoPanic.Backend.Models.LocalDataContext";
         }
 
         protected override void Seed(DemoPanic.Backend.Models.LocalDataContext context)

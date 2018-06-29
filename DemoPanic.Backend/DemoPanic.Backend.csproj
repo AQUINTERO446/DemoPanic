@@ -199,6 +199,7 @@
     <Compile Include="Controllers\ClientTypesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ParametersController.cs" />
     <Compile Include="Controllers\Users1Controller.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\UserTypesController.cs" />
@@ -209,6 +210,10 @@
     <Compile Include="Helpers\FilesHelper.cs" />
     <Compile Include="Helpers\MailHelper.cs" />
     <Compile Include="Helpers\UsersHelper.cs" />
+    <Compile Include="Migrations\201806291351245_Initial.cs" />
+    <Compile Include="Migrations\201806291351245_Initial.Designer.cs">
+      <DependentUpon>201806291351245_Initial.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -298,6 +303,11 @@
     <Content Include="Views\Users1\Details.cshtml" />
     <Content Include="Views\Users1\Edit.cshtml" />
     <Content Include="Views\Users1\Index.cshtml" />
+    <Content Include="Views\Parameters\Create.cshtml" />
+    <Content Include="Views\Parameters\Delete.cshtml" />
+    <Content Include="Views\Parameters\Details.cshtml" />
+    <Content Include="Views\Parameters\Edit.cshtml" />
+    <Content Include="Views\Parameters\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -320,6 +330,11 @@
       <Project>{324b319e-70c1-4c56-bd19-636f6d260aac}</Project>
       <Name>DemoPanic.Domain</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201806291351245_Initial.resx">
+      <DependentUpon>201806291351245_Initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -23,9 +23,12 @@ namespace DemoPanic.Domain
 
         public System.Data.Entity.DbSet<DemoPanic.Domain.UserType> UserTypes { get; set; }
 
+        public System.Data.Entity.DbSet<DemoPanic.Domain.Parameters> Parameters { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Add(new DecimalPrecisionAttributeConvention());
         }
+        
     }
 }
