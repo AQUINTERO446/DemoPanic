@@ -33,55 +33,7 @@
             this.saveCurrentPosittion();
             //this.escribirBaseDatos(2);
         }
-        
-        private async void escribirBaseDatos(int clientTypeId)
-        {
-            const double MAXIMUM_LATITUD = 7.142354;
-            const double MINIMUM_LATITUD = 6.970838;
-            const double MAXIMA_LONGITUDD = -73.076229;
-            const double MINIMUM_LONGITUD = -73.180674;
 
-            Random rnd = new Random();
-
-            int disponibles = 100;
-            var apiSecurity = Application.Current.Resources["APISecurity"].ToString();
-            for (int i = 1; i <= disponibles; i++)
-            {
-                double latitude =
-                            rnd.NextDouble() * (MAXIMUM_LATITUD - MINIMUM_LATITUD) + MINIMUM_LATITUD;
-                double longitude =
-                            rnd.NextDouble() * (MAXIMA_LONGITUDD - MINIMUM_LONGITUD) + MINIMUM_LONGITUD;
-                var user = new User
-                {
-                    Email = i + "num" + clientTypeId + "user@random.com",
-                    FirstName = i + "Random" + clientTypeId + "FirstName",
-                    LastName = i + "Random" + clientTypeId + "LastName",
-                    Telephone = "-555-555-" + i,
-                    UserTypeId = 1,
-                    Password = "654321",
-                    ClientTypeId = clientTypeId,
-                    Latitude = Convert.ToDecimal(latitude),
-                    Longitude = Convert.ToDecimal(longitude)
-
-                };
-                var response = await this.apiService.Post(
-                apiSecurity,
-                "/api",
-                "/Users",
-                user);
-
-                if (!response.IsSuccess)
-                {
-                    Console.WriteLine("----Error    " + response.Message);
-                }
-                else
-                {
-                    Console.WriteLine("Success -- "+i);
-                }
-
-            }
-        }
-        
         private async void saveCurrentPosittion()
         {
             await geolocatorService.GetLocation();
@@ -110,19 +62,21 @@
 
             if (!response.IsSuccess)
             {
-               await Application.Current.MainPage.DisplayAlert(
-                    "Error",
-                    response.Message,
-                    "Aceptar");
+                await Application.Current.MainPage.DisplayAlert(
+                     "Error",
+                     response.Message,
+                     "Aceptar");
                 return;
             }
 
-            await Application.Current.MainPage.DisplayAlert(
-                "Confirmación",
-                "Tu pocicion esta siendo rastreada por nuestros sistemas",
-                "Aceptar");
+            //TODO: Notificacion push
+            //await Application.Current.MainPage.DisplayAlert(
+            //    "Confirmación",
+            //    "Tu pocicion esta siendo rastreada por nuestros sistemas",
+            //    "Aceptar");
 
         }
+
         #endregion
 
         #region Commands
@@ -136,8 +90,10 @@
 
         private async void AmbulanceAlert()
         {
-            MainViewModel.GetInstance().Ubications = new UbicationsViewModel();
-            MainViewModel.GetInstance().Ubications.Ubications = await GetUbications(3);
+            var ubicationsViewModel = MainViewModel.GetInstance().Ubications;
+            ubicationsViewModel = new UbicationsViewModel();
+            ubicationsViewModel.LoadPins(
+                await this.GetUbications(2));
 
             await App.Navigator.PushAsync(new UbicationsPage());
             return;
@@ -174,8 +130,11 @@
 
         private async void PoliceAlert()
         {
-            MainViewModel.GetInstance().Ubications = new UbicationsViewModel();
-            MainViewModel.GetInstance().Ubications.Ubications = await GetUbications(2);
+            var ubicationsViewModel = MainViewModel.GetInstance().Ubications;
+            ubicationsViewModel = new UbicationsViewModel();
+            ubicationsViewModel.LoadPins(
+                await this.GetUbications(3));
+
             await App.Navigator.PushAsync(new UbicationsPage());
             return;
         }
@@ -201,23 +160,7 @@
             return;
         }
 
-        private async Task<List<Ubication>> GetUbications(int clientTypeId)
-        {
-            var userLocal = MainViewModel.GetInstance().User;
-
-            var apiSecurity = Application.Current.Resources["APISecurity"].ToString();
-            var user = await this.apiService.GetUsersByClientType(
-                apiSecurity,
-                "/api",
-                "/Users/GetUsersByClientType",
-                MainViewModel.GetInstance().Token.TokenType,
-                MainViewModel.GetInstance().Token.AccessToken,
-                clientTypeId,
-                (decimal)userLocal.Latitude,
-                (decimal)userLocal.Longitude
-                );
-            return user;
-        }
+        
         #endregion
 
         #region Methods
@@ -227,6 +170,74 @@
             if (dialer != null)
                 await dialer.DialAsync(number);
         }
+
+        private async Task<List<Ubication>> GetUbications(int clientTypeId)
+        {
+            var userLocal = MainViewModel.GetInstance().User;
+
+            var apiSecurity = Application.Current.Resources["APISecurity"].ToString();
+
+            var ubicationList = await this.apiService.GetUsersByClientType(
+                apiSecurity,
+                "/api",
+                "/Users/GetUsersByClientType",
+                MainViewModel.GetInstance().Token.TokenType,
+                MainViewModel.GetInstance().Token.AccessToken,
+                clientTypeId,
+                (decimal)userLocal.Latitude,
+                (decimal)userLocal.Longitude
+                );
+            return ubicationList;
+
+        }
+
+        //private async void escribirBaseDatos(int clientTypeId)
+        //{
+        //    const double MAXIMUM_LATITUD = 7.142354;
+        //    const double MINIMUM_LATITUD = 6.970838;
+        //    const double MAXIMA_LONGITUDD = -73.076229;
+        //    const double MINIMUM_LONGITUD = -73.180674;
+
+        //    Random rnd = new Random();
+
+        //    int disponibles = 100;
+        //    var apiSecurity = Application.Current.Resources["APISecurity"].ToString();
+        //    for (int i = 1; i <= disponibles; i++)
+        //    {
+        //        double latitude =
+        //                    rnd.NextDouble() * (MAXIMUM_LATITUD - MINIMUM_LATITUD) + MINIMUM_LATITUD;
+        //        double longitude =
+        //                    rnd.NextDouble() * (MAXIMA_LONGITUDD - MINIMUM_LONGITUD) + MINIMUM_LONGITUD;
+        //        var user = new User
+        //        {
+        //            Email = i + "num" + clientTypeId + "user@random.com",
+        //            FirstName = i + "Random" + clientTypeId + "FirstName",
+        //            LastName = i + "Random" + clientTypeId + "LastName",
+        //            Telephone = "-555-555-" + i,
+        //            UserTypeId = 1,
+        //            Password = "654321",
+        //            ClientTypeId = clientTypeId,
+        //            Latitude = Convert.ToDecimal(latitude),
+        //            Longitude = Convert.ToDecimal(longitude)
+
+        //        };
+        //        var response = await this.apiService.Post(
+        //        apiSecurity,
+        //        "/api",
+        //        "/Users",
+        //        user);
+
+        //        if (!response.IsSuccess)
+        //        {
+        //            Console.WriteLine("----Error    " + response.Message);
+        //        }
+        //        else
+        //        {
+        //            Console.WriteLine("Success -- " + i);
+        //        }
+
+        //    }
+        //}
         #endregion
     }
 }

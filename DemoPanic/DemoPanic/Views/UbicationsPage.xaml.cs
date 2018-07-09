@@ -5,7 +5,6 @@
     using Xamarin.Forms.Xaml;
     using ViewModels;
     using System;
-    using System.Globalization;
 
     [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class UbicationsPage : ContentPage
@@ -19,19 +18,25 @@
         }
         #endregion
 
+        #region Properties
+        
+        #endregion
+
         #region Methods
         void MoveMapToCurrentPosition()
         {
-            NumberFormatInfo provider = new NumberFormatInfo();
-            provider.NumberDecimalSeparator = ",";
             var user = MainViewModel.GetInstance().User;
-            var position = new Position(
-                    Convert.ToDouble(user.Latitude, provider),
-                    Convert.ToDouble(user.Longitude, provider));
+            if (user.Longitude != null && user.Latitude != null)
+            {
+                var position = new Position(
+                    Convert.ToDouble(user.Latitude),
+                    Convert.ToDouble(user.Longitude));
                 MyMap.MoveToRegion(MapSpan.FromCenterAndRadius(
                     position,
                     Distance.FromKilometers(6.5)));
-            
+            }
+            //de lo contrario espere por que el metodo de saveCurrentPosittion() aun no termina
+
             LoadPins();
         }
         /// <summary>
@@ -40,7 +45,6 @@
         private void LoadPins()
         {
             var ubicationsViewModel = UbicationsViewModel.GetInstance();
-            ubicationsViewModel.LoadPins();
 
             foreach (var pin in ubicationsViewModel.Pins)
             {

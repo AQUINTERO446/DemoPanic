@@ -21,6 +21,7 @@ namespace DemoPanic.ViewModels
         {
             instance = this;
         }
+
         #endregion
 
         #region Properties
@@ -29,22 +30,13 @@ namespace DemoPanic.ViewModels
             get;
             set;
         }
-
-        public List<Ubication> Ubications
-        {
-            get;
-            set;
-        }
         #endregion
 
         #region Methods
-        public void LoadPins()
+        public void LoadPins(List<Ubication> ubicationList)
         {
-            //Aqui response tendra la lista de Ubicaciones
-            //var ubications = GetListUbications();
-
             Pins = new ObservableCollection<Pin>();
-            foreach (var ubication in Ubications)
+            foreach (var ubication in ubicationList)
             {
                 Pins.Add(new Pin
                 {
@@ -56,37 +48,7 @@ namespace DemoPanic.ViewModels
                     Type = PinType.Place,
                 });
             }
-        }
-        private List<Ubication> GetListUbications()
-        {
 
-            const double MAXIMUM_LATITUD = 7.142354;
-            const double MINIMUM_LATITUD = 7.058251;
-            const double MAXIMA_LONGITUDD = -73.076229;
-            const double MINIMUM_LONGITUD = -73.180674;
-
-            Random rnd = new Random();
-
-            List<Ubication> list = new List<Ubication>();
-
-            int disponibles = rnd.Next(3, 11);
-
-            for (int i = 1; i <= disponibles; i++)
-            {
-                list.Add( new Ubication
-                    {
-                        Address = "Direccion-"+ i,
-                        Description = "Descripcion "+ i,
-                        Latitude = 
-                            rnd.NextDouble() * (MAXIMUM_LATITUD - MINIMUM_LATITUD) + MINIMUM_LATITUD,
-                        Longitude = 
-                            rnd.NextDouble() * (MAXIMA_LONGITUDD - MINIMUM_LONGITUD) + MINIMUM_LONGITUD,
-                        Phone = i + "-666-000",
-                        UbicationId = i-1
-                    }
-                );
-            }
-            return list;
         }
         #endregion
 

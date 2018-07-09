@@ -5,6 +5,7 @@
     using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.SqlServer;
     using System.Data.Entity.Validation;
     using System.Globalization;
     using System.Linq;
@@ -18,6 +19,7 @@
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
     using Newtonsoft.Json.Linq;
+    using static System.Data.Entity.SqlServer.SqlFunctions;
 
     [RoutePrefix("api/Users")]
     public class UsersController : ApiController
@@ -46,7 +48,6 @@
 
         
         [HttpPost]
-        [Authorize]
         [Route("GetUsersByClientType")]
         public async Task<IHttpActionResult> GetUsersByClientType(JObject form)
         {
@@ -74,13 +75,45 @@
                 return null;
             }
 
-            double radius = (double) Convert.ToDouble(radiusParameter.Parameter);
-            double range = (double) Convert.ToDouble(rangeParameter.Parameter);
-            double minimumServices = (double)Convert.ToDouble(minimumServicesParameter.Parameter);
+            CultureInfo cultureInfo = new CultureInfo("en-US");
+
+            decimal radius = Convert.ToDecimal(radiusParameter.Parameter, cultureInfo);
+            decimal range = Convert.ToDecimal(rangeParameter.Parameter, cultureInfo);
+            decimal minimumServices = Convert.ToDecimal(minimumServicesParameter.Parameter, cultureInfo);
+
+            decimal? lon1 = longitud - range / Convert.ToDecimal(Math.Abs(Math.Cos(Convert.ToDouble(latitud)) * 111.045D));
+            decimal? lon2 = longitud + range / Convert.ToDecimal(Math.Abs(Math.Cos(Convert.ToDouble(latitud) * 111.045D)));
+            decimal? lat1 = latitud - (range / 111.045M);
+            decimal? lat2 = latitud + (range / 111.045M);
 
             var user = await db.Users.
                 Where(u => u.ClientTypeId == clientTypeId).
                     ToArrayAsync();
+
+            decimal pi = Convert.ToDecimal(Math.PI);
+
+            var userList = await db.Users.
+                Where(u => u.ClientTypeId == clientTypeId &&
+                u.Latitude > lat1 && u.Latitude < lat2 &&
+                u.Longitude > lon1 && u.Longitude < lon2
+                ).
+                Select(x => new {
+                    x.UserId,
+                    x.FirstName,
+                    x.Latitude,
+                    x.Longitude,
+                    distance =
+                    6371 * 2 * Asin(SquareRoot(
+                    Square(Sin(Math.Abs((decimal)latitud) - Math.Abs((decimal)x.Latitude)) *
+                    Pi() / 180 / 2) +
+                    Cos(Math.Abs((decimal)latitud) * pi / 180) * Cos(Math.Abs((decimal)x.Latitude) *
+                    pi / 180) *
+                    Square(Sin(Math.Abs((decimal)longitud) - Math.Abs((decimal)x.Longitude)) *
+                    Pi() / 180 / 2)))
+                }
+                ).
+                OrderBy(ux => ux.distance).
+                ToArrayAsync();
 
             if (user== null)
             {
@@ -101,13 +134,13 @@
                 else
                 {
                     User help = (User)indexUser.Current;
-                    if (DistanceCalculation.GeoCodeCalc.CalcDistance(
+                    decimal distance = (decimal)DistanceCalculation.GeoCodeCalc.CalcDistance(
                         (double)help.Latitude,
                         (double)help.Longitude,
                         (double)latitud,
                         (double)longitud,
-                        DistanceCalculation.GeoCodeCalcMeasurement.Kilometers) <
-                    radius)
+                        DistanceCalculation.GeoCodeCalcMeasurement.Kilometers);
+                    if (distance<radius)
                     {
                         userOut.Add(help);
                     }
@@ -118,6 +151,22 @@
             return Ok(userOut);
         }
 
+        public decimal Distance(
+            decimal latitud,
+            decimal longitud,
+            decimal uLatitude, 
+            decimal uLongitude,
+            decimal pi)
+        {
+            var op =6371M * 2M * (decimal)Asin(SquareRoot(
+                    Square(Sin(Math.Abs(latitud) - Math.Abs(uLatitude)) *
+                    Pi() / 180 / 2) +
+                    Cos(Math.Abs(latitud) * pi / 180) * Cos(Math.Abs(uLatitude) *
+                    pi / 180) *
+                    Square(Sin(Math.Abs(longitud) - Math.Abs(uLongitude)) *
+                    Pi() / 180 / 2)));
+            return op;
+        }
 
         [HttpPost]
         [Authorize]

@@ -1,7 +1,5 @@
 ﻿namespace DemoPanic.Helpers
 {
-    using System;
-    using System.Globalization;
     using DemoPanic.Domain;
     using DemoPanic.Models;
 
