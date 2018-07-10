@@ -171,7 +171,7 @@
                 await dialer.DialAsync(number);
         }
 
-        private async Task<List<Ubication>> GetUbications(int clientTypeId)
+        private async Task<List<UbicationApi>> GetUbications(int clientTypeId)
         {
             var userLocal = MainViewModel.GetInstance().User;
 

@@ -582,7 +582,7 @@
             return facebookResponse;
         }
 
-        public async Task<List<Ubication>> GetUsersByClientType(
+        public async Task<List<UbicationApi>> GetUsersByClientType(
            string urlBase,
            string servicePrefix,
            string controller,
@@ -622,15 +622,15 @@
                 }
 
                 var result = await response.Content.ReadAsStringAsync();
-                var list = JsonConvert.DeserializeObject<List<User>>(result);
-                var listOut = new List<Ubication>();
-                foreach (User userLocal in list)
-                {
-                    listOut.Add(
-                        Helpers.Converter.ToUserUbication(
-                            userLocal));
-                }
-                return listOut;
+                var list = JsonConvert.DeserializeObject<List<UbicationApi>>(result);
+                //var listOut = new List<Ubication>();
+                //foreach (User userLocal in list)
+                //{
+                //    listOut.Add(
+                //        Helpers.Converter.ToUserUbication(
+                //            userLocal));
+                //}
+                return list;
             }
             catch
             {

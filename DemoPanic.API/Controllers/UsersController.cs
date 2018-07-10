@@ -110,7 +110,7 @@
                     x.Longitude,
                     Address = x.ClientTypeId,
                     Phone = x.Telephone,
-                    distance =
+                    Distance =
                         6371 * 2 * Asin(SquareRoot(
                         Square(Sin(Math.Abs((decimal)latitud) - Math.Abs((decimal)x.Latitude)) *
                         Pi() / 180 / 2) +
@@ -120,7 +120,7 @@
                         Pi() / 180 / 2)))
                 }
                 ).
-                OrderBy(ux => ux.distance).
+                OrderBy(ux => ux.Distance).
                 Take(minimumServices).
                 ToArrayAsync();
 

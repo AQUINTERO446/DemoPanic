@@ -1,4 +1,5 @@
-﻿using DemoPanic.Models;
+﻿using DemoPanic.Domain;
+using DemoPanic.Models;
 using DemoPanic.Services;
 using DemoPanic.Views;
 using GalaSoft.MvvmLight.Command;
@@ -33,7 +34,7 @@ namespace DemoPanic.ViewModels
         #endregion
 
         #region Methods
-        public void LoadPins(List<Ubication> ubicationList)
+        public void LoadPins(List<UbicationApi> ubicationList)
         {
             Pins = new ObservableCollection<Pin>();
             foreach (var ubication in ubicationList)
