@@ -76,96 +76,58 @@
             }
 
             CultureInfo cultureInfo = new CultureInfo("en-US");
+            decimal pi = Convert.ToDecimal(Math.PI);
 
             decimal radius = Convert.ToDecimal(radiusParameter.Parameter, cultureInfo);
             decimal range = Convert.ToDecimal(rangeParameter.Parameter, cultureInfo);
-            decimal minimumServices = Convert.ToDecimal(minimumServicesParameter.Parameter, cultureInfo);
+            int minimumServices = Convert.ToInt32(minimumServicesParameter.Parameter, cultureInfo);
 
-            decimal? lon1 = longitud - range / Convert.ToDecimal(Math.Abs(Math.Cos(Convert.ToDouble(latitud)) * 111.045D));
-            decimal? lon2 = longitud + range / Convert.ToDecimal(Math.Abs(Math.Cos(Convert.ToDouble(latitud) * 111.045D)));
-            decimal? lat1 = latitud - (range / 111.045M);
-            decimal? lat2 = latitud + (range / 111.045M);
+            decimal? lat1 = latitud - (range * 180 / (6371 * pi)); //lat min
+            decimal? lat2 = latitud + (range * 180 / (6371 * pi)); //lat max
 
+            double latT = Math.Asin(Math.Sin((double) (latitud*(pi/180))) /
+                Math.Cos((double) (range/6371))); // Latitud central relativa a una aproximacion esferica de la tierra
+
+            decimal lonDiff = (decimal) (Math.Asin(Math.Sin((double)(range / 6371)) /
+                Math.Cos((double)(latitud * (pi / 180)))));
+
+            decimal? lon1 = (longitud * (pi / 180) - lonDiff) * (180 / pi); // lon min
+            decimal? lon2 = (longitud * (pi / 180) + lonDiff) * (180 / pi); //lon max
+            
+            //Ayuda matematica
+            //https://www.movable-type.co.uk/scripts/latlong.html
+            //http://janmatuschek.de/LatitudeLongitudeBoundingCoordinates#AngularRadius
             var user = await db.Users.
-                Where(u => u.ClientTypeId == clientTypeId).
-                    ToArrayAsync();
-
-            decimal pi = Convert.ToDecimal(Math.PI);
-
-            var userList = await db.Users.
                 Where(u => u.ClientTypeId == clientTypeId &&
-                u.Latitude > lat1 && u.Latitude < lat2 &&
-                u.Longitude > lon1 && u.Longitude < lon2
+                    u.Latitude > lat1 && u.Latitude < lat2 &&
+                    u.Longitude > lon1 && u.Longitude < lon2
                 ).
                 Select(x => new {
-                    x.UserId,
-                    x.FirstName,
+                    UbicationId = x.UserId,
+                    Description = x.FirstName,
                     x.Latitude,
                     x.Longitude,
+                    Address = x.ClientTypeId,
+                    Phone = x.Telephone,
                     distance =
-                    6371 * 2 * Asin(SquareRoot(
-                    Square(Sin(Math.Abs((decimal)latitud) - Math.Abs((decimal)x.Latitude)) *
-                    Pi() / 180 / 2) +
-                    Cos(Math.Abs((decimal)latitud) * pi / 180) * Cos(Math.Abs((decimal)x.Latitude) *
-                    pi / 180) *
-                    Square(Sin(Math.Abs((decimal)longitud) - Math.Abs((decimal)x.Longitude)) *
-                    Pi() / 180 / 2)))
+                        6371 * 2 * Asin(SquareRoot(
+                        Square(Sin(Math.Abs((decimal)latitud) - Math.Abs((decimal)x.Latitude)) *
+                        Pi() / 180 / 2) +
+                        Cos(Math.Abs((decimal)latitud) * pi / 180) * Cos(Math.Abs((decimal)x.Latitude) *
+                        pi / 180) *
+                        Square(Sin(Math.Abs((decimal)longitud) - Math.Abs((decimal)x.Longitude)) *
+                        Pi() / 180 / 2)))
                 }
                 ).
                 OrderBy(ux => ux.distance).
+                Take(minimumServices).
                 ToArrayAsync();
 
             if (user== null)
             {
                 return null;
             }
-
-            List<User> userOut = new List<User>();
-            IEnumerator indexUser = user.GetEnumerator();
-
-            while (userOut.Count < minimumServices && radius < range)
-            {
-                indexUser.MoveNext();
-                if (!indexUser.MoveNext())
-                {
-                    indexUser.Reset();
-                    radius+=radius;
-                }
-                else
-                {
-                    User help = (User)indexUser.Current;
-                    decimal distance = (decimal)DistanceCalculation.GeoCodeCalc.CalcDistance(
-                        (double)help.Latitude,
-                        (double)help.Longitude,
-                        (double)latitud,
-                        (double)longitud,
-                        DistanceCalculation.GeoCodeCalcMeasurement.Kilometers);
-                    if (distance<radius)
-                    {
-                        userOut.Add(help);
-                    }
-                }
-                
-
-            }
-            return Ok(userOut);
-        }
-
-        public decimal Distance(
-            decimal latitud,
-            decimal longitud,
-            decimal uLatitude, 
-            decimal uLongitude,
-            decimal pi)
-        {
-            var op =6371M * 2M * (decimal)Asin(SquareRoot(
-                    Square(Sin(Math.Abs(latitud) - Math.Abs(uLatitude)) *
-                    Pi() / 180 / 2) +
-                    Cos(Math.Abs(latitud) * pi / 180) * Cos(Math.Abs(uLatitude) *
-                    pi / 180) *
-                    Square(Sin(Math.Abs(longitud) - Math.Abs(uLongitude)) *
-                    Pi() / 180 / 2)));
-            return op;
+            return Ok(user);
         }
 
         [HttpPost]
