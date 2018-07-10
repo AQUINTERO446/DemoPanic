@@ -48,6 +48,7 @@
 
         
         [HttpPost]
+        [Authorize]
         [Route("GetUsersByClientType")]
         public async Task<IHttpActionResult> GetUsersByClientType(JObject form)
         {
