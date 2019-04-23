@@ -20,4 +20,4 @@ Puedes cargar el proyecto desde Visual Studio 2017 y antes de construir los bina
 
 ## License
 
-Este proyecto está licenciado bajo la licencia MIT. Consulte el archivo [LICENSE.md](LICENSE.md) para obtener más detalles.
+Este proyecto está licenciado bajo la licencia MIT. Consulte el archivo [LICENSE](LICENSE) para obtener más detalles.
